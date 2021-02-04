@@ -1,0 +1,81 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+.DS_Store
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+frontend/src/main/web/dist
+frontend/src/main/web/tmp
+frontend/src/main/web/out-tsc
+# Only exists if Bazel was run
+frontend/src/main/web/bazel-out
+
+# dependencies
+frontend/src/main/web/node_modules
+
+# profiling files
+frontend/src/main/web/chrome-profiler-events*.json
+frontend/src/main/web/speed-measure-plugin*.json
+
+# IDEs and editors
+frontend/src/main/web/.idea
+frontend/src/main/web/.project
+frontend/src/main/web/.classpath
+frontend/src/main/web/.c9/
+frontend/src/main/web/*.launch
+frontend/src/main/web/.settings/
+frontend/src/main/web/*.sublime-workspace
+
+# IDE - VSCode
+frontend/src/main/web/.vscode/*
+frontend/src/main/web/!.vscode/settings.json
+frontend/src/main/web/!.vscode/tasks.json
+frontend/src/main/web/!.vscode/launch.json
+frontend/src/main/web/!.vscode/extensions.json
+frontend/src/main/web/.history/*
+
+# misc
+frontend/src/main/web/.sass-cache
+frontend/src/main/web/connect.lock
+frontend/src/main/web/coverage
+frontend/src/main/web/libpeerconnection.log
+frontend/src/main/web/npm-debug.log
+frontend/src/main/web/yarn-error.log
+frontend/src/main/web/testem.log
+frontend/src/main/web/typings
+
+# System Files
+frontend/src/main/web/.DS_Store
+frontend/src/main/web/Thumbs.db
+
