@@ -1,0 +1,17 @@
+
+
+.main-toolbar {
+  width: 100%;
+  background-color: rgba(0,0,0, 0.5);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 30px;
+}
+
+.main-toolbar span {
+  color: white;
+  cursor: pointer;
+  margin-right: 70px;
+}
