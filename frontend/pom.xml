@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>frontend</artifactId>
-    <name>brain-duel-front</name>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +16,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/web/dist/ui-app/</directory>
+                <directory>src/main/web/dist/ui-app</directory>
                 <targetPath>static</targetPath>
             </resource>
         </resources>
