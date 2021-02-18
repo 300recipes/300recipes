@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
-
+  openSignUp() {
+    this.modalService.open(SignUpComponent, { size: "sm" });
+  }
 }
