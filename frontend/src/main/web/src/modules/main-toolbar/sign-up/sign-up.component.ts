@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/modules/core/services/authentication.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,7 +19,8 @@ export class SignUpComponent implements OnInit {
   lastName = '';
   message: string;
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal,
+    private authenticationService: AuthenticationService,) { }
 
   ngOnInit(): void {
     this.isSent = false;
@@ -54,17 +56,15 @@ export class SignUpComponent implements OnInit {
       this.message = "Паролі не співпадають";
       return;
     }
-    // this.authenticationService.signupUser(this.username, this.email, this.password).pipe(first())
+    // this.authenticationService.signupUser(this.username, this.email, this.password, this.firstName, this.lastName).pipe(first())
     //   .subscribe(n => {
     //     if (n) {
     //       this.isSent = true;
     //       this.activeModal.close();
-    //       this.modalMessageService.show(this.localeService.getValue('authorization.signUp.mailTitle'),
-    //         this.localeService.getValue('authorization.signUp.mailBody'));
     //     }
     //   },
     //     error => {
-    //       this.message = error.error ? error.error.message : this.localeService.getValue('authorization.login.error');
+    //       this.message = error.error ? error.error.message : "Сталася помилка! Спробуйте ще раз!";
     //       console.log(error);
     //       this.loading = false;
     //     }
