@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainPageComponent } from './landing-page/main-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 
 
