@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MainToolbarModule} from "../modules/main-toolbar/main-toolbar.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {LandingModule} from "../modules/landing/landing.module";
+import {MainModule} from "../modules/landing/main.module";
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import {LandingModule} from "../modules/landing/landing.module";
     BrowserModule,
     AppRoutingModule,
     MainToolbarModule,
-    LandingModule,
+    MainModule,
     NgbModule,
   ],
   providers: [],
