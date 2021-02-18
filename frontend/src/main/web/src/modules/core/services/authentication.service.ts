@@ -17,8 +17,7 @@ export class AuthenticationService {
 
   private url = "";
 
-  constructor(private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) { }
 
   /* POST: signup user */
   signupUser(username: string, email: string, password: string, firstName: string, lastName: string): any {

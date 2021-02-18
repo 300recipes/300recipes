@@ -56,19 +56,19 @@ export class SignUpComponent implements OnInit {
       this.message = "Паролі не співпадають";
       return;
     }
-    this.authenticationService.signupUser(this.username, this.email, this.password, this.firstName, this.lastName).pipe(first())
-      .subscribe(n => {
-        if (n) {
-          this.isSent = true;
-          this.activeModal.close();
-        }
-      },
-        error => {
-          this.message = error.error ? error.error.message : "Сталася помилка! Спробуйте ще раз!";
-          console.log(error);
-          this.loading = false;
-        }
-      );
+    // this.authenticationService.signupUser(this.username, this.email, this.password, this.firstName, this.lastName).pipe(first())
+    //   .subscribe(n => {
+    //     if (n) {
+    //       this.isSent = true;
+    //       this.activeModal.close();
+    //     }
+    //   },
+    //     error => {
+    //       this.message = error.error ? error.error.message : "Сталася помилка! Спробуйте ще раз!";
+    //       console.log(error);
+    //       this.loading = false;
+    //     }
+    //   );
     this.loading = true;
   }
 
