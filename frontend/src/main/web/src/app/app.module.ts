@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MainModule} from "../modules/landing/main.module";
 
 
+
 @NgModule({
   declarations: [
     AppComponent

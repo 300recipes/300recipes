@@ -6,7 +6,8 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>backend</artifactId>
-    <packaging>war</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -63,10 +64,10 @@
                         <phase>validate</phase>
                         <goals><goal>copy-resources</goal></goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory >
+                            <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.parent.basedir}/frontend/src/main/web/dist/ui-app/</directory >
+                                    <directory>${project.parent.basedir}/frontend/src/main/web/dist/ui-app/</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -86,12 +87,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <packagingExcludes>WEB-INF/lib/tomcat-*.jar</packagingExcludes>
-                </configuration>
+                <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>brain-duel-app</finalName>
     </build>
 </project>
