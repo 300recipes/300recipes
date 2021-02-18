@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MainToolbarModule} from "../modules/main-toolbar/main-toolbar.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {MainToolbarModule} from "../modules/main-toolbar/main-toolbar.module";
     BrowserModule,
     AppRoutingModule,
     MainToolbarModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
