@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import {MainToolbarModule} from "../modules/main-toolbar/main-toolbar.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {LandingModule} from "../modules/landing/landing.module";
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -14,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     MainToolbarModule,
+    LandingModule,
     NgbModule,
   ],
   providers: [],
