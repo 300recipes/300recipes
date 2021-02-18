@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignInComponent } from '../sign-in/sign-in.component';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 
 @Component({
@@ -16,4 +17,9 @@ export class MainToolbarComponent implements OnInit {
   openSignUp() {
     this.modalService.open(SignUpComponent, { size: "sm" });
   }
+
+  openSignIn() {
+    this.modalService.open(SignInComponent);
+  }
+
 }
