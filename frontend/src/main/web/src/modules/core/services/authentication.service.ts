@@ -40,4 +40,13 @@ export class AuthenticationService {
     return crypt;
   }
 
+  signinUser(username: string, password: string): any {
+    const userInfo = {
+      username,
+      password: this.passwordHashing(password, this.PASSWORD_HASHING_ITERATIONS_AMOUNT),
+    };
+
+    return this.http.post(this.url + 'sign-in', JSON.stringify(userInfo), this.httpOptions);
+  }
+
 }
