@@ -8,14 +8,16 @@
     
 
     <div class="form-group form-row">
-        <input type="text" ngbAutofocus (keydown.enter)="logIn()" 
-        class="form-control rounded" placeholder="Ім'я користувача"
+        <label for="input1">Ім'я користувача</label>
+        <input id="input1" type="text" ngbAutofocus (keydown.enter)="logIn()" 
+        class="form-control rounded" placeholder="Сергій88"
           name="username" [(ngModel)]="username">
     </div>
 
     <div class="form-group form-row">
-        <input type="password" ngbAutofocus (keydown.enter)="logIn()" 
-        class="form-control rounded" placeholder="Пароль"
+        <label for="input2">Пароль</label>
+        <input id="input2" type="password" ngbAutofocus (keydown.enter)="logIn()" 
+        class="form-control rounded" placeholder="•••"
           name="password" [(ngModel)]="password">
     </div>
 
