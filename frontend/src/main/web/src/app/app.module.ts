@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MainToolbarModule} from "../modules/main-toolbar/main-toolbar.module";
+import { MainToolbarModule } from "../modules/main-toolbar/main-toolbar.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MainModule} from "../modules/main/main.module";
 
