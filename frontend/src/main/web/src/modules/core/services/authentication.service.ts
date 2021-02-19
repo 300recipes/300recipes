@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as sha1 from 'js-sha1';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,13 @@ export class AuthenticationService {
   private url = "";
 
   constructor(private http: HttpClient) { }
+
+
+  public get currentUserValue() {
+    return localStorage.getItem('userData');
+  }
+
+
 
   /* POST: signup user */
   signupUser(username: string, email: string, password: string, firstName: string, lastName: string): any {
@@ -45,7 +53,13 @@ export class AuthenticationService {
       password: this.passwordHashing(password, this.PASSWORD_HASHING_ITERATIONS_AMOUNT),
     };
 
-    return this.http.post(this.url + 'sign-in', JSON.stringify(userInfo), this.httpOptions);
+    localStorage.setItem('userData', "token");
+
+    return this.http.post(this.url + 'sign-in', JSON.stringify(userInfo), this.httpOptions).pipe(
+      map(data => {
+        
+      })
+    );
   }
 
 }

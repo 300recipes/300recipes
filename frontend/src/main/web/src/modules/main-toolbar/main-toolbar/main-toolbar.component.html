@@ -1,4 +1,5 @@
 <div class="main-toolbar">
-  <span (click)="openSignIn()">Sign in</span>
-  <span (click)="openSignUp()">Sign up</span>
+  <span *ngIf="!show()" (click)="openSignIn()">Sign in</span>
+  <span *ngIf="!show()" (click)="openSignUp()">Sign up</span>
+  <span *ngIf="show()" (click)="signOut()">Sign out</span>
 </div>

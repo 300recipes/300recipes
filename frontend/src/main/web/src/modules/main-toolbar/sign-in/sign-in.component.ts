@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/modules/core/services/authentication.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,13 +15,24 @@ export class SignInComponent implements OnInit {
   password = '';
 
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal, 
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   logIn(){
-    
+    this.authenticationService.signinUser(this.username,this.password).pipe(first())
+    .subscribe(
+        () => {
+            //alert("Signed in")
+        },
+        error => {
+            //alert("Signing in failed " + error)
+            console.log(error)
+        }
+    );
+    this.activeModal.close('Close click');
   }
 
 }
