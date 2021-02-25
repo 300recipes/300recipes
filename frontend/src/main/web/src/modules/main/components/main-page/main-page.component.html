@@ -1,8 +1,8 @@
 <div class="landing-page">
-
   <div class="receipts-list">
-    <app-receipt-item></app-receipt-item>
-    <app-receipt-item></app-receipt-item>
-    <app-receipt-item></app-receipt-item>
+    <app-receipt-list-item *ngFor="let receipt of (_receiptList$ | async)"
+                           [receipt]="receipt"
+    >
+    </app-receipt-list-item>
   </div>
 </div>
