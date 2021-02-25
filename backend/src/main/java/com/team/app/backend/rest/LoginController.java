@@ -44,7 +44,9 @@ public class LoginController {
 //            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
             User user = userService.findByUsername(username);
             String[] params = new String[]{username};
-
+            if(user == null){
+                return ResponseEntity.badRequest().body("failed to login");
+            }
             Map<Object, Object> response = new HashMap<>();
             response.put("id", user.getId());
             response.put("firstName", user.getFirstName());
