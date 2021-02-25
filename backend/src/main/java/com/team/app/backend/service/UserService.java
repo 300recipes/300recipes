@@ -1,77 +1,36 @@
 package com.team.app.backend.service;
 
 
-import com.team.app.backend.entity.Role;
-import com.team.app.backend.entity.User;
-import com.team.app.backend.repository.RoleRepository;
-import com.team.app.backend.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import com.team.app.backend.dto.UserCreateDto;
+import com.team.app.backend.dto.UserRegistrationDto;
+import com.team.app.backend.exception.UserAlreadyExistsException;
+import com.team.app.backend.persistance.model.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+public interface UserService {
 
-@Service
-public class UserService implements UserDetailsService {
-    @PersistenceContext
-    private EntityManager em;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
 
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
 
-        return user;
-    }
 
-    public User findUserById(Long userId) {
-        Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new User());
-    }
+    User getUserById(Long id);
 
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
+    User getUserByUsername(String username);
 
-    public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+    boolean deleteUser(Long id);
 
-        if (userFromDB != null) {
-            return false;
-        }
+    boolean  checkTokenAvailability(String token);
 
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return true;
-    }
+    User createNewUser(UserCreateDto userCreateDto);
 
-    public boolean deleteUser(Long userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
-    }
 
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
+    void registerNewUserAccount(UserRegistrationDto userDto) throws UserAlreadyExistsException;
+
+    boolean activateUserAccount(String token);
+
+    boolean checkRegistDate(User user);
+
+    boolean isUserRegistered(String username);
+
+    User findByUsername(String username);
+
 }
