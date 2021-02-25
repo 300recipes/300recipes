@@ -5,3 +5,12 @@ html {
   margin: 0 !important;
   background: url("assets/img/bg.png");
 }
+
+.router-link-active {
+  cursor: pointer;
+}
+
+.router-link-active:active,
+.router-link-active:focus {
+  outline: none;
+}

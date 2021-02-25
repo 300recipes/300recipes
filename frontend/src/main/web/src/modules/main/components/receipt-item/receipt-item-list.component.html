@@ -1,6 +1,8 @@
 <div class="receipt">
   <div class="thumb">
-    <img src="{{receipt.url || 'assets/img/dish_thumb.png'}}">
+    <img src="{{receipt.url || 'assets/img/dish_thumb.png'}}"
+         [ngClass]="{'router-link-active': true}"
+         [routerLink]="receipt.id">
   </div>
 
   <div class="info">
@@ -9,7 +11,10 @@
         {{hash}}
       </span>
     </div>
-    <div class="title single-line">{{receipt.title || 'Default title'}}
+    <div class="title single-line"
+         [ngClass]="{'router-link-active': true}"
+         [routerLink]="receipt.id">
+      {{receipt.title || 'Default title'}}
     </div>
     <div class="author single-line">{{receipt.author || 'Default author'}}
     </div>

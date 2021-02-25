@@ -36,7 +36,7 @@ export class ReceiptService {
   }
 
   // TODO: from, quantity
-  // TODO: add url!
+  // TODO: add url! + dont forget to change to this method in component
   public getReceiptList(): Observable<Receipt[]> {
     return this.http.get<Receipt[]>("");
   }

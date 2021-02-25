@@ -9,13 +9,11 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
   templateUrl: './main-toolbar.component.html',
   styleUrls: ['./main-toolbar.component.css']
 })
-export class MainToolbarComponent implements OnInit {
+export class MainToolbarComponent {
 
   constructor(private modalService: NgbModal,
     private authenticationService: AuthenticationService) { }
 
-  ngOnInit(): void {
-  }
   openSignUp() {
     this.modalService.open(SignUpComponent, { size: "sm" });
   }
