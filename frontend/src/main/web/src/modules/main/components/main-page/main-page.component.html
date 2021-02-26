@@ -1,8 +1,7 @@
 <div class="landing-page">
   <div class="receipts-list">
     <app-receipt-list-item *ngFor="let receipt of (_receiptList$ | async)"
-                           [receipt]="receipt"
-    >
+                           [receipt]="receipt">
     </app-receipt-list-item>
   </div>
 </div>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {ReceiptService} from "../../core/services/receipt.service";
+import {ActivatedRoute} from "@angular/router";
+import {Receipt} from "../../core/models/receipt.model";
+import {Observable} from "rxjs";
+import {flatMap, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-receipt-page',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReceiptPageComponent implements OnInit {
 
-  constructor() { }
+  private receiptId: string;
+  public _receipt$: Observable<Receipt>;
+
+  constructor(private receiptService: ReceiptService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this._receipt$ = this.route.params.pipe(
+      tap((params: {id: string}) => this.receiptId = params.id),
+      flatMap(val => this.receiptService.getStubReceipt(val.id))
+    )
   }
-
 }

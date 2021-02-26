@@ -1,0 +1,82 @@
+.receipt-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  margin: 0 30px;
+  height: 100%;
+}
+
+.receipt-page .header {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.header .thumb {
+  border-radius: 10px;
+  background-color: transparent;
+  flex: 0 0 45%;
+}
+
+.thumb img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+}
+
+.header .info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 0 0 45%;
+}
+
+.info .title {
+  font-weight: bolder;
+  font-size: 35px;
+}
+
+.info .author {
+  color: gray;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.content .content-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 35px 75px;
+}
+
+.content-segment .title {
+  font-size: 25px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.content-segment .content-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.ingredient .quantity {
+  margin-left: auto;
+}

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { MainToolbarModule } from "../modules/main-toolbar/main-toolbar.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MainModule} from "../modules/main/main.module";
+import {ReceiptModule} from "../modules/receipt/receipt.module";
+import {CommonModule} from "@angular/common";
 
 
 
@@ -14,11 +16,13 @@ import {MainModule} from "../modules/main/main.module";
     AppComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     MainToolbarModule,
     MainModule,
     NgbModule,
+    ReceiptModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

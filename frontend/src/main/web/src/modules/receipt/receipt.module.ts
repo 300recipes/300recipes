@@ -6,6 +6,7 @@ import { ReceiptPageComponent } from './receipt-page/receipt-page.component';
 
 @NgModule({
   declarations: [ReceiptPageComponent],
+  exports: [ReceiptPageComponent],
   imports: [
     CommonModule
   ]
