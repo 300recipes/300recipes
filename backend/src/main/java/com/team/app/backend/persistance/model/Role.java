@@ -3,14 +3,14 @@ package com.team.app.backend.persistance.model;
 
 
 public class Role {
-    private Long id;
+    private long id;
     private String name;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -22,7 +22,7 @@ public class Role {
         this.name = name;
     }
 
-    public Role(Long id, String name) {
+    public Role(long id, String name) {
         this.id = id;
         this.name = name;
     }

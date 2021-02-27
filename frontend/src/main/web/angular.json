@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "ui-app"
+  "defaultProject": "ui-app",
+  "cli": {
+    "analytics": false
+  }
 }

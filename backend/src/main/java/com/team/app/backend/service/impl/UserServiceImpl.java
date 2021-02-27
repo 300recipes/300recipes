@@ -8,6 +8,7 @@ import com.team.app.backend.persistance.model.Role;
 import com.team.app.backend.persistance.model.User;
 import com.team.app.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,22 +23,13 @@ import java.util.UUID;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final long ENGLISH_ID = 1L;
-    private final long UKRAINE_ID = 1L;
-
     @Autowired
     private UserDao userDao;
-
-
 
     @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
-
-
-
-
 
     @Override
     public User getUserById(Long id) {

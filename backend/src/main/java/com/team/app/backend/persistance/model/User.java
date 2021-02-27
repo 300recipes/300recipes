@@ -6,7 +6,7 @@ package com.team.app.backend.persistance.model;
 import java.util.Date;
 
 public class User {
-    private Long id;
+    private long id;
     private String firstName;
     private String lastName;
     private String username;
@@ -20,7 +20,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String username, String password, String email, String image, Date registr_date, String activate_link, Role role) {
+    public User(long id, String firstName, String lastName, String username, String password, String email, String image, Date registr_date, String activate_link, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,11 +33,11 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
