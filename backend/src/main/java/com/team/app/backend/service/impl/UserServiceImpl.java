@@ -9,6 +9,7 @@ import com.team.app.backend.persistance.model.User;
 import com.team.app.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username).orElse(null);
+
     }
 
     @Override
@@ -69,11 +71,13 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userCreateDto.getEmail());
         user.setUsername(userCreateDto.getUsername());
         user.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
+
         user.setActivate_link("ttest");
         user.setRegistr_date(new Date());
         user.setRole(new Role(userCreateDto.getRole().getName().equals("admin") ? 3L : 2L ,userCreateDto.getRole().getName()));
         userDao.save(user);
         return userDao.findByUsername(userCreateDto.getUsername()).orElse(null);
+
     }
 
     public boolean  checkTokenAvailability(String token){
@@ -94,7 +98,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
         user.setActivate_link("asdsa");
         user.setRegistr_date(new Date());
         user.setRole(new Role(1L,Role.USER));
@@ -126,6 +129,7 @@ public class UserServiceImpl implements UserService {
     public boolean isUserRegistered(String username) {
         boolean res = userDao.findByUsername(username).isPresent();
         return res;
+
     }
 
 

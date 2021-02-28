@@ -1,5 +1,6 @@
 package com.team.app.backend.persistance.model;
 
+
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +15,6 @@ import java.util.Set;
 public class User implements UserDetails, Serializable {
 
     private Long id;
-
     private String firstName;
     private String lastName;
     private String username;
@@ -24,13 +24,13 @@ public class User implements UserDetails, Serializable {
     private Date registr_date;
     private String activate_link;
     private Role role;
-
     private boolean enabled = true;
 
     public User() {
     }
 
     public User(Long id, String firstName, String lastName, String username, String password, String email, String image, Date registr_date, String activate_link, Role role) {
+
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +41,6 @@ public class User implements UserDetails, Serializable {
         this.registr_date = registr_date;
         this.activate_link = activate_link;
         this.role = role;
-
         this.enabled = true;
     }
 
@@ -50,6 +49,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
@@ -76,6 +76,7 @@ public class User implements UserDetails, Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -150,6 +151,7 @@ public class User implements UserDetails, Serializable {
     public boolean isEnabled() {
         return enabled;
     }
+
 
 
 }

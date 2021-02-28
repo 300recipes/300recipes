@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
+
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -82,6 +83,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByUsername(String username) {
+
         String sql="select U.id,U.firstname,U.lastname,U.username,U.image,U.password,U.email,U.registr_date,U.activate_link,U.role_id,R.name as role_name from users U INNER JOIN role R ON R.id = U.role_id where U.username = ? ";
         List<User> userslist=jdbcTemplate.query(sql,
                 new Object[]{username},
@@ -90,6 +92,7 @@ public class UserDaoImpl implements UserDao {
             return Optional.empty();
         }else{
             return Optional.of(userslist.get(0));
+
         }
 
     }

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 import java.util.*;
 
 @RestController
@@ -43,8 +44,7 @@ public class RegistrationController {
         catch (UserAlreadyExistsException e) {
             String[] params = new String[]{userDto.getUsername()};
             return  ResponseEntity.badRequest().body(messageSource.getMessage("user.exist", params, LocaleContextHolder.getLocale()));
-        }
-
+       }
         return ResponseEntity.ok().body(new HashMap<String,String>());
     }
 

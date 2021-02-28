@@ -1,6 +1,4 @@
 package com.team.app.backend.persistance.model;
-
-
 import org.springframework.security.core.GrantedAuthority;
 
 public class Role implements GrantedAuthority {
@@ -16,6 +14,7 @@ public class Role implements GrantedAuthority {
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
@@ -36,4 +35,5 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return name;
     }
+
 }

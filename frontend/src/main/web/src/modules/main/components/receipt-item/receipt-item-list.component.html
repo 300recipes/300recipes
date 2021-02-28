@@ -1,0 +1,33 @@
+<div class="receipt">
+  <div class="thumb">
+    <img src="{{receipt.url || 'assets/img/dish_thumb.png'}}"
+         [ngClass]="{'router-link-active': true}"
+         [routerLink]="receipt.id">
+  </div>
+
+  <div class="info">
+    <div class="hashes single-line">
+      <span *ngFor="let hash of (receipt.hashes || ['#def_hash1', '#def_hash2'])">
+        {{hash}}
+      </span>
+    </div>
+    <div class="title single-line"
+         [ngClass]="{'router-link-active': true}"
+         [routerLink]="receipt.id">
+      {{receipt.title || 'Default title'}}
+    </div>
+    <div class="author single-line">{{receipt.author || 'Default author'}}
+    </div>
+    <div class="description">{{receipt.description || 'Default description'}}
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="save">
+    </div>
+    <div class="up">
+    </div>
+    <div class="down">
+    </div>
+  </div>
+</div>

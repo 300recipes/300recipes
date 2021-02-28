@@ -4,7 +4,8 @@ import com.team.app.backend.persistance.model.Role;
 
 public class UserCreateDto {
 
-        private String firstName;
+
+    private String firstName;
     private String lastName;
     private String username;
     private String email;

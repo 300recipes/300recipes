@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h4 class="modal-title">Залогуйтеся</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+
+    <div class="form-group form-row">
+        <label for="input1">Ім'я користувача</label>
+        <input id="input1" type="text" ngbAutofocus (keydown.enter)="logIn()" 
+        class="form-control rounded" placeholder="Сергій88"
+          name="username" [(ngModel)]="username">
+    </div>
+
+    <div class="form-group form-row">
+        <label for="input2">Пароль</label>
+        <input id="input2" type="password" ngbAutofocus (keydown.enter)="logIn()" 
+        class="form-control rounded" placeholder="•••"
+          name="password" [(ngModel)]="password">
+    </div>
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="logIn()">Увійти</button>
+  </div>
