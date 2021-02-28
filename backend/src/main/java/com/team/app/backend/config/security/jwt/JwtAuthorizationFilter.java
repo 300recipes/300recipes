@@ -1,10 +1,10 @@
-package com.team.app.backend.config.security;
+package com.team.app.backend.config.security.jwt;
 
 
 import com.team.app.backend.persistance.dao.UserDao;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -57,8 +57,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 .orElse(null);
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                userDetails, null,
-                ofNullable(userDetails).map(UserDetails::getAuthorities).orElse(null)
+                userDetails, "",
+                userDetails.getAuthorities()
         );
 
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

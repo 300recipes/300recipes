@@ -1,8 +1,10 @@
 package com.team.app.backend.config.security;
 
+import com.team.app.backend.config.security.jwt.JwtAuthorizationFilter;
 import com.team.app.backend.persistance.dao.UserDao;
 import com.team.app.backend.persistance.model.Role;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,8 +29,8 @@ import static java.lang.String.format;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
         securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
+        prePostEnabled = true,
+        jsr250Enabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -56,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Enable CORS and disable CSRF
-        http = http.cors().and().csrf().disable();
+        http = http.cors().and()
+                .csrf().disable();
 
         // Set session management to stateless
         http = http
@@ -82,10 +86,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Our public endpoints
                 .antMatchers("/api/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login**").permitAll()
-                //.antMatchers(HttpMethod.GET, "/api/recipes/**").permitAll()
                 // Our private endpoints
                 .antMatchers("/api/admin/**").hasRole(Role.ADMIN)
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         // Add JWT token filter
         http.addFilterBefore(
@@ -112,10 +115,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-//    @Bean
-//    GrantedAuthorityDefaults grantedAuthorityDefaults() {
-//        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix
-//    }
 
 }
