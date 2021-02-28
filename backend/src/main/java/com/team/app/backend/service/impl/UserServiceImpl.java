@@ -8,6 +8,7 @@ import com.team.app.backend.persistance.model.Role;
 import com.team.app.backend.persistance.model.User;
 import com.team.app.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +24,21 @@ import java.util.UUID;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    private final long ENGLISH_ID = 1L;
+    private final long UKRAINE_ID = 1L;
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserDao userDao;
 
+    public UserServiceImpl(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+        return userDao.findByUsername(username).orElse(null);
+
     }
 
     @Override
@@ -38,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
-        return userDao.findByUsername(username);
+        return userDao.findByUsername(username).orElse(null);
     }
 
     @Override
@@ -60,12 +70,14 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userCreateDto.getUsername());
         user.setEmail(userCreateDto.getEmail());
         user.setUsername(userCreateDto.getUsername());
-        user.setPassword(userCreateDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
+
         user.setActivate_link("ttest");
         user.setRegistr_date(new Date());
         user.setRole(new Role(userCreateDto.getRole().getName().equals("admin") ? 3L : 2L ,userCreateDto.getRole().getName()));
         userDao.save(user);
-        return userDao.findByUsername(userCreateDto.getUsername());
+        return userDao.findByUsername(userCreateDto.getUsername()).orElse(null);
+
     }
 
     public boolean  checkTokenAvailability(String token){
@@ -85,14 +97,10 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-//        String token =UUID.randomUUID().toString();
-//        while(checkTokenAvailability(token)){
-//            token =UUID.randomUUID().toString();
-//        }
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setActivate_link("asdsa");
         user.setRegistr_date(new Date());
-        user.setRole(new Role(1L,"USER"));
+        user.setRole(new Role(1L,Role.USER));
 
         userDao.save(user);
 
@@ -119,10 +127,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean isUserRegistered(String username) {
-        return userDao.findByUsername(username) != null;
+        boolean res = userDao.findByUsername(username).isPresent();
+        return res;
+
     }
-
-
-
 
 }

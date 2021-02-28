@@ -1,43 +1,55 @@
 package com.team.app.backend.persistance.model;
 
 
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
-public class User {
-    private long id;
+
+@Data
+public class User implements UserDetails, Serializable {
+
+    private Long id;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
     private String email;
-    private String imageUrl;
+    private String image;
     private Date registr_date;
     private String activate_link;
     private Role role;
+    private boolean enabled = true;
 
     public User() {
     }
 
-    public User(long id, String firstName, String lastName, String username, String password, String email, String imageUrl, Date registr_date, String activate_link, Role role) {
+    public User(Long id, String firstName, String lastName, String username, String password, String email, String image, Date registr_date, String activate_link, Role role) {
+
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.registr_date = registr_date;
         this.activate_link = activate_link;
         this.role = role;
+        this.enabled = true;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
+
         this.id = id;
     }
 
@@ -65,6 +77,12 @@ public class User {
         this.username = username;
     }
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return new HashSet<Role>(){{ add(role); }} ;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -81,12 +99,12 @@ public class User {
         this.email = email;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Date getRegistr_date() {
@@ -113,4 +131,27 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return enabled;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return enabled;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return enabled;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+
+
 }

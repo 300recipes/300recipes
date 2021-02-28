@@ -3,12 +3,14 @@ package com.team.app.backend.persistance.model;
 public class IngredientToRecipe {
     long recipeId;
     long ingredientId;
+    String name;
     String measure;
     String amount;
 
-    public IngredientToRecipe(long recipeId, long ingredientId, String measure, String amount) {
+    public IngredientToRecipe(long recipeId, long ingredientId,String name, String measure, String amount) {
         this.recipeId = recipeId;
         this.ingredientId = ingredientId;
+        this.name=name;
         this.measure = measure;
         this.amount = amount;
     }
@@ -44,4 +46,13 @@ public class IngredientToRecipe {
     public void setAmount(String amount) {
         this.amount = amount;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

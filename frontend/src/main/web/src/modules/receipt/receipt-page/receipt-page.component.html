@@ -2,7 +2,7 @@
      class="receipt-page">
   <div class="header">
     <div class="thumb">
-      <img src="{{receipt.url || 'assets/img/dish_thumb.png'}}">
+      <img src="{{receipt.imageUrl || 'assets/img/dish_thumb.png'}}">
     </div>
     <div class="info">
       <span class="title">{{receipt.title || 'Default title'}}</span>
@@ -14,19 +14,24 @@
 
     <div class="ingredients content-segment">
       <span class="title">Ingredients:</span>
-      <div *ngFor="let ingredient of receipt.content.ingredients; let i = index"
+      <div *ngFor="let ingredient of receipt.ingredients; let i = index"
         class="ingredient content-row">
         <span class="name">{{(i + 1) + '. ' + ingredient.name}}</span>
-        <span class="quantity">{{ingredient.quantity}} pieces</span>
+        <span class="quantity">{{ingredient.amount}} {{ingredient.measure}}</span>
       </div>
     </div>
 
 
     <div class="steps content-segment">
       <span class="title">Steps:</span>
-      <div *ngFor="let step of receipt.content.steps; let i = index"
+      <div *ngFor="let step of receipt.steps; let i = index"
            class="step content-row">
-        <span class="name">{{(i + 1) + '. ' + step}}</span>
+        <span class="orderNum">{{step.orderNumber}} {{step.title}}</span>
+        <span class="description">{{step.description}}</span>
+        <div>
+          <img src="{{step.imageUrl || 'assets/img/dish_thumb.png'}}">
+        </div>
+
       </div>
     </div>
   </div>

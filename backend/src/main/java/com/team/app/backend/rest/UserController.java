@@ -1,19 +1,12 @@
 package com.team.app.backend.rest;
 
 
-import com.team.app.backend.dto.UserCreateDto;
-import com.team.app.backend.persistance.model.User;
 import com.team.app.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController

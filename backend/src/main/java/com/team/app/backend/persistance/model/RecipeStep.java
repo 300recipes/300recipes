@@ -3,16 +3,21 @@ package com.team.app.backend.persistance.model;
 public class RecipeStep {
     long id;
     long recipeId;
+    int orderNumber;
     String title;
     String description;
     String imageUrl;
 
-    public RecipeStep(long id, long recipeId, String title, String description, String imageUrl) {
+    public RecipeStep(long id, long recipeId, int orderNumber, String title, String description, String imageUrl) {
         this.id = id;
         this.recipeId = recipeId;
+        this.orderNumber = orderNumber;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
+    }
+
+    public RecipeStep() {
     }
 
     public long getId() {
@@ -29,6 +34,14 @@ public class RecipeStep {
 
     public void setRecipeId(long recipeId) {
         this.recipeId = recipeId;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public String getTitle() {

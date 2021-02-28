@@ -4,20 +4,25 @@ export interface Receipt {
   title: string;
   description: string;
   author: string;
-  url?: string;
+  imageUrl?: string;
   hashes?: string[];
-  content?: ReceiptContent;
+  ingredients?: Ingredient[];
+  steps?: ReceiptStep[];
 }
 
 export interface Ingredient {
+  recipeId?: string;
+  ingredientId?: string;
   name: string;
-  quantity: string
-  // TODO: add type (pcs, grams, etc)
+  measure: string;
+  amount: string;
 }
 
-export interface ReceiptContent {
-  ingredients: Ingredient[];
-  steps: string[];
-  images?: string[];
+export interface ReceiptStep {
+  id?: string;
+  recipeId?: string;
+  orderNumber: number;
+  title: string;
+  description: string;
+  imageUrl: string;
 }
-

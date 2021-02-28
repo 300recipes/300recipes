@@ -8,10 +8,6 @@ import com.team.app.backend.persistance.model.User;
 
 public interface UserService {
 
-
-
-
-
     User getUserById(Long id);
 
     User getUserByUsername(String username);
@@ -21,7 +17,6 @@ public interface UserService {
     boolean  checkTokenAvailability(String token);
 
     User createNewUser(UserCreateDto userCreateDto);
-
 
     void registerNewUserAccount(UserRegistrationDto userDto) throws UserAlreadyExistsException;
 

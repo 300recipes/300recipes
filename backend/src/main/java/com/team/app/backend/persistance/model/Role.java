@@ -1,16 +1,20 @@
 package com.team.app.backend.persistance.model;
+import org.springframework.security.core.GrantedAuthority;
 
+public class Role implements GrantedAuthority {
 
+    public static final String USER = "R_USER";
+    public static final String ADMIN = "R_ADMIN";
 
-public class Role {
-    private long id;
+    private Long id;
     private String name;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
+
         this.id = id;
     }
 
@@ -22,8 +26,14 @@ public class Role {
         this.name = name;
     }
 
-    public Role(long id, String name) {
+    public Role(Long id, String name) {
         this.id = id;
         this.name = name;
     }
+
+    @Override
+    public String getAuthority() {
+        return name;
+    }
+
 }

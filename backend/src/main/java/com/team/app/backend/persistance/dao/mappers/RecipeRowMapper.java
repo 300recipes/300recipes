@@ -17,7 +17,6 @@ public class RecipeRowMapper implements RowMapper<Recipe> {
         return new Recipe((long) resultSet.getInt("id"),
                 resultSet.getString("title"),
                 resultSet.getString("description"),
-                resultSet.getString("content"),
                 resultSet.getString("image"),
                 resultSet.getString("author")
         );

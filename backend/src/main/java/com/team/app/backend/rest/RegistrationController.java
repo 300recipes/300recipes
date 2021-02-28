@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 import java.util.*;
 
 @RestController
@@ -33,8 +35,7 @@ public class RegistrationController {
 
     @PostMapping("/sign-up")
     public ResponseEntity registerUserAccount(
-            @RequestBody UserRegistrationDto userDto) {
-        System.out.println("sign-up");
+            @RequestBody @Valid UserRegistrationDto userDto) {
 
         try {
             userService.registerNewUserAccount(userDto);

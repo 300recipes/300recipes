@@ -1,6 +1,7 @@
 package com.team.app.backend.service;
 
 import com.team.app.backend.persistance.model.Recipe;
+import com.team.app.backend.persistance.model.RecipeWithContent;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface RecipeService {
 
     void addRecipe();
 
-    Recipe getRecipeById(Long id);
+    RecipeWithContent getRecipeById(Long id);
 
     List<Recipe> getAllRecipes();
 }

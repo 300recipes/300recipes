@@ -1,6 +1,8 @@
 package com.team.app.backend.persistance.dao;
 
 import com.team.app.backend.persistance.model.Recipe;
+import com.team.app.backend.persistance.model.RecipeWithContent;
+
 import java.util.List;
 
 public interface RecipeDao {

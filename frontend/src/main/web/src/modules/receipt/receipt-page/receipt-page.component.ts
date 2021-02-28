@@ -21,7 +21,7 @@ export class ReceiptPageComponent implements OnInit {
   ngOnInit(): void {
     this._receipt$ = this.route.params.pipe(
       tap((params: {id: string}) => this.receiptId = params.id),
-      flatMap(val => this.receiptService.getStubReceipt(val.id))
+      flatMap(val => this.receiptService.getReceipt(val.id))
     )
   }
 }

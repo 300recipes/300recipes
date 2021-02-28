@@ -5,15 +5,20 @@ public class Recipe {
     long id;
     String title;
     String description;
-    String content;
     String imageUrl;
     String author;
 
-    public Recipe(long id, String title, String description, String content, String imageUrl, String author) {
+    public Recipe(Recipe recipe){
+        this.id = recipe.getId();
+        this.title = recipe.getTitle();
+        this.description = recipe.getDescription();
+        this.imageUrl = recipe.getImageUrl();
+        this.author= recipe.getAuthor();
+    }
+    public Recipe(long id, String title, String description,  String imageUrl, String author) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.content = content;
         this.imageUrl = imageUrl;
         this.author=author;
     }
@@ -43,14 +48,6 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getImageUrl() {
