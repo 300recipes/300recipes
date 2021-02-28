@@ -1,4 +1,4 @@
-package com.team.app.backend.config.security;
+package com.team.app.backend.config.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.app.backend.persistance.model.User;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 
 import static com.team.app.backend.config.security.SecurityConstants.*;
 
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }

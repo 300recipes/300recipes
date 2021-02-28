@@ -1,4 +1,4 @@
-package com.team.app.backend.config.security;
+package com.team.app.backend.config.security.jwt;
 
 import com.team.app.backend.persistance.model.User;
 import io.jsonwebtoken.*;

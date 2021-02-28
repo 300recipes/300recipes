@@ -3,13 +3,10 @@ package com.team.app.backend.persistance.model;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-
+import java.util.*;
 
 @Data
 public class User implements UserDetails, Serializable {
@@ -25,6 +22,8 @@ public class User implements UserDetails, Serializable {
     private String activate_link;
     private Role role;
     private boolean enabled = true;
+
+    private Set<Role> authorities = new HashSet<>();
 
     public User() {
     }
@@ -80,7 +79,9 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new HashSet<Role>(){{ add(role); }} ;
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        return grantedAuthorities;
     }
 
     public String getPassword() {

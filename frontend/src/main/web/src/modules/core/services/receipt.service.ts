@@ -42,7 +42,7 @@ export class ReceiptService {
       //     "Profit"
       //   ],
       // },
-      url: "https://eda.ru/img/eda/c620x415i/s2.eda.ru/StaticContent/Photos/120214122930/130729002219/p_O.jpg",
+      imageUrl: "https://eda.ru/img/eda/c620x415i/s2.eda.ru/StaticContent/Photos/120214122930/130729002219/p_O.jpg",
     },
     {
       id: "2",
@@ -70,7 +70,7 @@ export class ReceiptService {
       //     "Put salt and fry them for 2-3 minutes",
       //   ],
       // },
-      url: "https://img.povar.ru/main/f2/45/9f/54/yaichnica_obichnaya-384161.jpg",
+      imageUrl: "https://img.povar.ru/main/f2/45/9f/54/yaichnica_obichnaya-384161.jpg",
     },
     {
       id: "3",
@@ -98,7 +98,7 @@ export class ReceiptService {
       //     "Profit",
       //   ]
       // },
-      url: "http://www.tarikasingh.com/wp-content/uploads/2016/07/easy-one-pot-rice-dish-tehri-or-taheri-from-uttar-pradesh.1024x1024.jpg",
+      imageUrl: "http://www.tarikasingh.com/wp-content/uploads/2016/07/easy-one-pot-rice-dish-tehri-or-taheri-from-uttar-pradesh.1024x1024.jpg",
     }
   ];
 
