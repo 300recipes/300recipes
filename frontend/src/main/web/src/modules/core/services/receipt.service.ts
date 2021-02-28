@@ -109,7 +109,7 @@ export class ReceiptService {
   // TODO: from, quantity
   // TODO: add url! + dont forget to change to this method in component
   public getReceiptList(): Observable<Receipt[]> {
-    return this.http.get<Receipt[]>("");
+    return this.http.get<Receipt[]>("localhost:8083/api/recipes");
   }
 
   public getStubReceipts(): Observable<Receipt[]> {
@@ -119,4 +119,9 @@ export class ReceiptService {
   public getStubReceipt(id: string): Observable<Receipt> {
     return of(this.stubReceipts.find(receipt => receipt.id === id));
   }
+
+  public getReceipt(id: string): Observable<Receipt> {
+    return this.http.get<Receipt>("localhost:8083/api/recipe/"+id);
+  }
+
 }

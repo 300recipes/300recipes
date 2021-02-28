@@ -10,7 +10,7 @@ import {Receipt} from "../../../core/models/receipt.model";
 })
 
 export class MainPageComponent {
-  public _receiptList$: Observable<Receipt[]> = this.receiptService.getStubReceipts();
+  public _receiptList$: Observable<Receipt[]> = this.receiptService.getReceiptList();
 
   constructor(private receiptService: ReceiptService) { }
 }

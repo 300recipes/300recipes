@@ -12,7 +12,7 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private String image;
+    private String imageUrl;
     private Date registr_date;
     private String activate_link;
     private Role role;
@@ -20,14 +20,14 @@ public class User {
     public User() {
     }
 
-    public User(long id, String firstName, String lastName, String username, String password, String email, String image, Date registr_date, String activate_link, Role role) {
+    public User(long id, String firstName, String lastName, String username, String password, String email, String imageUrl, Date registr_date, String activate_link, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.registr_date = registr_date;
         this.activate_link = activate_link;
         this.role = role;
@@ -81,12 +81,12 @@ public class User {
         this.email = email;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Date getRegistr_date() {

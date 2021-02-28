@@ -1,2 +1,4 @@
-package com.team.app.backend.persistance.dao;public interface IngredientsDao {
+package com.team.app.backend.persistance.dao;
+
+public interface IngredientsDao {
 }

@@ -6,15 +6,15 @@ public class Recipe {
     String title;
     String description;
     String content;
-    String image;
+    String imageUrl;
     String author;
 
-    public Recipe(long id, String title, String description, String content, String image, String author) {
+    public Recipe(long id, String title, String description, String content, String imageUrl, String author) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.content = content;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.author=author;
     }
 
@@ -53,12 +53,12 @@ public class Recipe {
         this.content = content;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
 

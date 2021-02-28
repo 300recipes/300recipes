@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
-                user.getImage(),
+                user.getImageUrl(),
                 user.getRegistr_date(),
                 user.getActivate_link(),
                 user.getRole().getId()
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
-                user.getImage(),
+                user.getImageUrl(),
                 user.getRegistr_date(),
                 user.getActivate_link(),
                 user.getRole().getId(),

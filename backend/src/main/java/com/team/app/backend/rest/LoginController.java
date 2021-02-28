@@ -53,7 +53,7 @@ public class LoginController {
             response.put("lastName", user.getLastName());
             response.put("email", user.getEmail());
             response.put("password", user.getPassword());
-            response.put("image", user.getImage());
+            response.put("image", user.getImageUrl());
 
             response.put("role", user.getRole());
 
