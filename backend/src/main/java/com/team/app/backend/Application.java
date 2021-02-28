@@ -6,10 +6,11 @@ package com.team.app.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 
 @SpringBootApplication
+@EnableAsync
 public class Application extends SpringBootServletInitializer {
 
 	
