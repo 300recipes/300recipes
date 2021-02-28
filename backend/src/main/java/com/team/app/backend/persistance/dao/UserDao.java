@@ -3,9 +3,9 @@ package com.team.app.backend.persistance.dao;
 import com.team.app.backend.persistance.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
-
 
 
     void save(User user);
@@ -16,7 +16,8 @@ public interface UserDao {
 
     User get(Long id);
 
-    User findByUsername(String username);
+
+    Optional<User> findByUsername(String username);
 
     String getUserPasswordByUsername(String username);
 
