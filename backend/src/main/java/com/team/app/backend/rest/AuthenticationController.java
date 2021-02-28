@@ -1,6 +1,6 @@
 package com.team.app.backend.rest;
 
-import com.team.app.backend.config.security.JwtUtil;
+import com.team.app.backend.config.security.jwt.JwtUtil;
 import com.team.app.backend.dto.UserLoginDto;
 import com.team.app.backend.persistance.dao.mappers.UserRowMapper;
 import com.team.app.backend.persistance.model.User;
