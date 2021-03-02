@@ -53,7 +53,6 @@ public class AuthenticationController {
             response.put("firstName", user.getFirstName());
             response.put("lastName", user.getLastName());
             response.put("email", user.getEmail());
-            response.put("password", user.getPassword());
             response.put("image", user.getImage());
             response.put("role", user.getRole());
             response.put("username", request.getUsername());
@@ -67,7 +66,8 @@ public class AuthenticationController {
                     )
                     .body(response);
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            System.out.println("BadCredential");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 }

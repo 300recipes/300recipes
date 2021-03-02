@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers("/api/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/login**").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/login/**").permitAll()
                 // Our private endpoints
                 .antMatchers("/api/admin/**").hasRole(Role.ADMIN)
                 .anyRequest().permitAll();

@@ -16,7 +16,7 @@ export class AuthenticationService {
     })
   };
 
-  private url = "https://recipes300.herokuapp.com/";
+  private url = "http://localhost:8083/api/";
 
   constructor(private http: HttpClient) { }
 
@@ -31,11 +31,12 @@ export class AuthenticationService {
   signupUser(username: string, email: string, password: string, firstName: string, lastName: string): any {
     const userInfo = {
       username,
-      password: this.passwordHashing(password, this.PASSWORD_HASHING_ITERATIONS_AMOUNT),
+      password,
       email,
       firstName,
       lastName
     };
+    console.log(userInfo);
     return this.http.post(this.url + 'sign-up', JSON.stringify(userInfo), this.httpOptions);
   }
 
@@ -50,15 +51,13 @@ export class AuthenticationService {
   signinUser(username: string, password: string): any {
     const userInfo = {
       username,
-      password: this.passwordHashing(password, this.PASSWORD_HASHING_ITERATIONS_AMOUNT),
+      password
     };
 
-    localStorage.setItem('userData', "token");
-
-    return this.http.post(this.url + 'LOGIN', JSON.stringify(userInfo), this.httpOptions).pipe(
-      map(data => {
-        console.table(data);
-      })
+    //localStorage.setItem('userData', "token");
+    console.log(userInfo);
+    return this.http.post(this.url + 'login', JSON.stringify(userInfo), this.httpOptions).pipe(
+        map(data => { localStorage.setItem('userData', JSON.stringify(data)) })
     );
   }
 

@@ -97,8 +97,8 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        //user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        //user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setActivate_link("asdsa");
         user.setRegistr_date(new Date());
         user.setRole(new Role(1L,Role.USER));
