@@ -1,5 +1,4 @@
-<div *ngIf="(_receipt$ | async) as receipt; else loading"
-     class="receipt-page">
+<div *ngIf="(_receipt$ | async) as receipt; else loading" class="receipt-page">
   <div class="header">
     <div class="thumb">
       <img src="{{receipt.imageUrl || 'assets/img/dish_thumb.png'}}">
@@ -14,8 +13,7 @@
 
     <div class="ingredients content-segment">
       <span class="title">Ingredients:</span>
-      <div *ngFor="let ingredient of receipt.ingredients; let i = index"
-        class="ingredient content-row">
+      <div *ngFor="let ingredient of receipt.ingredients; let i = index" class="ingredient content-row">
         <span class="name">{{(i + 1) + '. ' + ingredient.name}}</span>
         <span class="quantity">{{ingredient.amount}} {{ingredient.measure}}</span>
       </div>
@@ -24,14 +22,14 @@
 
     <div class="steps content-segment">
       <span class="title">Steps:</span>
-      <div *ngFor="let step of receipt.steps; let i = index"
-           class="step">
-        <div class="content-row orderNum">{{step.orderNumber}} {{step.title}}</div>
+      <div *ngFor="let step of receipt.steps; let i = index" class="step">
+        <div class="content-row orderNum">
+          <span class="fw-bolder fs-6 mt-3">{{step.orderNumber}}. {{step.title}}</span>
+        </div>
+        <div *ngIf="step.imageUrl" class="text-center">
+          <img height="200" class="rounded" src="{{step.imageUrl}}">
+        </div>
         <div class="content-row description">{{step.description}}</div>
-<!--        <div>-->
-<!--          <img src="{{step.imageUrl || 'assets/img/dish_thumb.png'}}">-->
-<!--        </div>-->
-
       </div>
     </div>
   </div>
