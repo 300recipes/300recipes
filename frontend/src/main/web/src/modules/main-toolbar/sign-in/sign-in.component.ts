@@ -15,7 +15,7 @@ export class SignInComponent implements OnInit {
   password = '';
 
 
-  constructor(public activeModal: NgbActiveModal, 
+  constructor(public activeModal: NgbActiveModal,
     private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -25,10 +25,10 @@ export class SignInComponent implements OnInit {
     this.authenticationService.signinUser(this.username,this.password).pipe(first())
     .subscribe(
         () => {
-            //alert("Signed in")
+            alert("Signed in")
         },
         error => {
-            //alert("Signing in failed " + error)
+            alert("Signing in failed " + error)
             console.log(error)
         }
     );

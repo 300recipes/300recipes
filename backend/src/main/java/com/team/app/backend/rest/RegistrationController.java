@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
+@RequestMapping(path = "api")
 public class RegistrationController {
 
     @Autowired
