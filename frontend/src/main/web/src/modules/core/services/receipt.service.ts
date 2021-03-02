@@ -8,6 +8,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ReceiptService {
 
+  private url: string = "https://recipes300.herokuapp.com/";
+
   // delete after backend is connected
   private stubReceipts: Receipt[] = [
     {
@@ -109,7 +111,7 @@ export class ReceiptService {
   // TODO: from, quantity
   // TODO: add url! + dont forget to change to this method in component
   public getReceiptList(): Observable<Receipt[]> {
-    return this.http.get<Receipt[]>("http://localhost:8083/api/recipes");
+    return this.http.get<Receipt[]>(this.url +"api/recipes");
   }
 
   public getStubReceipts(): Observable<Receipt[]> {
@@ -121,7 +123,7 @@ export class ReceiptService {
   }
 
   public getReceipt(id: string): Observable<Receipt> {
-    return this.http.get<Receipt>("http://localhost:8083/api/recipe/"+id);
+    return this.http.get<Receipt>(this.url +"api/recipe/"+id);
   }
 
 }

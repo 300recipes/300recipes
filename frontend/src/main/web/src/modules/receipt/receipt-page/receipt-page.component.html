@@ -25,9 +25,9 @@
     <div class="steps content-segment">
       <span class="title">Steps:</span>
       <div *ngFor="let step of receipt.steps; let i = index"
-           class="step content-row">
-        <span class="orderNum">{{step.orderNumber}} {{step.title}}</span>
-        <span class="description">{{step.description}}</span>
+           class="step">
+        <div class="content-row orderNum">{{step.orderNumber}} {{step.title}}</div>
+        <div class="content-row description">{{step.description}}</div>
 <!--        <div>-->
 <!--          <img src="{{step.imageUrl || 'assets/img/dish_thumb.png'}}">-->
 <!--        </div>-->
