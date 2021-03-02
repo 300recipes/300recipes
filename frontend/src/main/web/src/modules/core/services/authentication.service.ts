@@ -16,7 +16,7 @@ export class AuthenticationService {
     })
   };
 
-  private url = "http://localhost:8083/api/";
+  private url = "https://recipes300.herokuapp.com/api/";
 
   constructor(private http: HttpClient) { }
 
