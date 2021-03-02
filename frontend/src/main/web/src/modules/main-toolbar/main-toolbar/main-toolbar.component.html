@@ -6,5 +6,6 @@
   </span>
   <span *ngIf="!show()" (click)="openSignIn()">Sign in</span>
   <span *ngIf="!show()" (click)="openSignUp()">Sign up</span>
+  <span style="background-color: limegreen" *ngIf="show()" (click)="add()">Add</span>
   <span *ngIf="show()" (click)="signOut()">Sign out</span>
 </div>

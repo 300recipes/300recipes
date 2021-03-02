@@ -26,6 +26,10 @@ export class MainToolbarComponent {
     localStorage.removeItem('userData');
   }
 
+  add(){
+
+  }
+
   show(){
     return this.authenticationService.currentUserValue;
   }
