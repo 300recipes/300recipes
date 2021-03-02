@@ -16,8 +16,6 @@ public interface UserService {
 
     boolean  checkTokenAvailability(String token);
 
-    User createNewUser(UserCreateDto userCreateDto);
-
     void registerNewUserAccount(UserRegistrationDto userDto) throws UserAlreadyExistsException;
 
     boolean activateUserAccount(String token);

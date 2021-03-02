@@ -19,10 +19,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-@RequestMapping("api")
 public class RegistrationController {
-
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService userService;

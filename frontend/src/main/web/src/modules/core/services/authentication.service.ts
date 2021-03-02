@@ -16,7 +16,7 @@ export class AuthenticationService {
     })
   };
 
-  private url = "";
+  private url = "https://recipes300.herokuapp.com/";
 
   constructor(private http: HttpClient) { }
 
@@ -55,9 +55,9 @@ export class AuthenticationService {
 
     localStorage.setItem('userData', "token");
 
-    return this.http.post(this.url + 'sign-in', JSON.stringify(userInfo), this.httpOptions).pipe(
+    return this.http.post(this.url + 'LOGIN', JSON.stringify(userInfo), this.httpOptions).pipe(
       map(data => {
-        
+        console.table(data);
       })
     );
   }

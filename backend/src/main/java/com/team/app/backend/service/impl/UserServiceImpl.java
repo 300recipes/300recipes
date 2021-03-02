@@ -62,23 +62,23 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public User createNewUser(UserCreateDto userCreateDto){
-        User user = new User();
-
-        user.setFirstName(userCreateDto.getFirstName());
-        user.setLastName(userCreateDto.getLastName());
-        user.setUsername(userCreateDto.getUsername());
-        user.setEmail(userCreateDto.getEmail());
-        user.setUsername(userCreateDto.getUsername());
-        user.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
-
-        user.setActivate_link("ttest");
-        user.setRegistr_date(new Date());
-        user.setRole(new Role(userCreateDto.getRole().getName().equals("admin") ? 3L : 2L ,userCreateDto.getRole().getName()));
-        userDao.save(user);
-        return userDao.findByUsername(userCreateDto.getUsername()).orElse(null);
-
-    }
+//    public User createNewUser(UserCreateDto userCreateDto){
+//        User user = new User();
+//
+//        user.setFirstName(userCreateDto.getFirstName());
+//        user.setLastName(userCreateDto.getLastName());
+//        user.setUsername(userCreateDto.getUsername());
+//        user.setEmail(userCreateDto.getEmail());
+//        user.setUsername(userCreateDto.getUsername());
+//        user.setPassword(userCreateDto.getPassword());
+//
+//        user.setActivate_link("ttest");
+//        user.setRegistr_date(new Date());
+//        user.setRole(new Role(userCreateDto.getRole().getName().equals("admin") ? 3L : 2L ,userCreateDto.getRole().getName()));
+//        userDao.save(user);
+//        return userDao.findByUsername(userCreateDto.getUsername()).orElse(null);
+//
+//    }
 
     public boolean  checkTokenAvailability(String token){
         return userDao.checkTokenAvailability(token);
@@ -97,7 +97,8 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(userDto.getPassword());
+        //user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setActivate_link("asdsa");
         user.setRegistr_date(new Date());
         user.setRole(new Role(1L,Role.USER));
