@@ -10,6 +10,7 @@ export class CreateReceiptPageComponent implements OnInit {
 
   public receiptForm: FormGroup;
 
+  // todo: get from api
   public ingredients = [
     'sugar',
     'salt',
