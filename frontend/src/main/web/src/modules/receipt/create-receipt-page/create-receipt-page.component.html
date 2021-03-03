@@ -1,0 +1,52 @@
+<div class="create-recipe">
+  <span class="title">Create new recipe</span>
+  <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()">
+
+    <div class="title form-field">
+      <span>Title</span>
+      <input type="text" formControlName="title">
+    </div>
+
+    <div class="form-field">
+      <span>Description</span>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <div class="ingredients" formArrayName="ingredients">
+      <div class="header">
+        <span>Ingredients</span>
+        <button type="button" (click)="addIngredient()">Add ingredient</button>
+      </div>
+      <div *ngFor="let ingredient of ingredientsForm.controls; let i = index">
+        <div [formGroupName]="i" class="ingredient-row">
+          <span>{{i}}</span>
+          <select formControlName="ingredient">
+            <option *ngFor="let ing of ingredients" [ngValue]="ing">
+              {{ ing }}
+            </option>
+          </select>
+          <button type="button" (click)="removeIngredient(i)">-</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps" formArrayName="steps">
+      <div class="header">
+        <span>Steps</span>
+        <button type="button" (click)="addStep()">Add step</button>
+      </div>
+      <div *ngFor="let step of stepsForm.controls; let i = index">
+        <div [formGroupName]="i" class="step-row">
+          <span>{{i}}</span>
+          <input type="text" formControlName="title">
+          <textarea formControlName="description"></textarea>
+          <button type="button" (click)="removeStep(i)">-</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>

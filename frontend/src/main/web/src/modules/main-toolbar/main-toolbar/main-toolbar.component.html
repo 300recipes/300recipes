@@ -1,9 +1,14 @@
 <div class="main-toolbar">
-  <span class="title"
-        [ngClass]="{'router-link-active': true}"
-        [routerLink]="'/'">
-    300 Recipes
-  </span>
+  <div class="left">
+    <span class="title"
+          [ngClass]="{'router-link-active': true}"
+          [routerLink]="'/'">300 Recipes
+    </span>
+    <span>
+      <span [ngClass]="{'router-link-active': true}"
+            [routerLink]="'/receipts/create'">New</span>
+    </span>
+  </div>
   <span *ngIf="!show()" (click)="openSignIn()">Sign in</span>
   <span *ngIf="!show()" (click)="openSignUp()">Sign up</span>
   <span style="background-color: limegreen" *ngIf="show()" (click)="add()">Add</span>
