@@ -15,17 +15,18 @@
     <div class="ingredients" formArrayName="ingredients">
       <div class="header">
         <span>Ingredients</span>
-        <button type="button" (click)="addIngredient()">Add ingredient</button>
+        <div class="button" (click)="addIngredient()">+</div>
       </div>
       <div *ngFor="let ingredient of ingredientsForm.controls; let i = index">
         <div [formGroupName]="i" class="ingredient-row">
-          <span>{{i}}</span>
+          <!--span>{{i}}</span-->
+          <div class="button remove" (click)="removeIngredient(i)">-</div>
           <select formControlName="ingredient">
-            <option *ngFor="let ing of ingredients" [ngValue]="ing">
-              {{ ing }}
+            <option *ngFor="let ing of (availableIngredients$ | async)"
+                    [ngValue]="ing">
+              {{ ing.name }}
             </option>
           </select>
-          <button type="button" (click)="removeIngredient(i)">-</button>
         </div>
       </div>
     </div>
@@ -33,14 +34,16 @@
     <div class="steps" formArrayName="steps">
       <div class="header">
         <span>Steps</span>
-        <button type="button" (click)="addStep()">Add step</button>
+        <div class="button" (click)="addStep()">+</div>
       </div>
       <div *ngFor="let step of stepsForm.controls; let i = index">
         <div [formGroupName]="i" class="step-row">
-          <span>{{i}}</span>
-          <input type="text" formControlName="title">
+          <div class="step-header">
+            <span>{{i}}</span>
+            <input type="text" formControlName="title">
+            <button class="button remove" (click)="removeStep(i)">-</button>
+          </div>
           <textarea formControlName="description"></textarea>
-          <button type="button" (click)="removeStep(i)">-</button>
         </div>
       </div>
     </div>

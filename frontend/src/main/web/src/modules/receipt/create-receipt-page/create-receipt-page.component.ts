@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ReceiptService} from "../../core/services/receipt.service";
+import {Observable} from "rxjs";
+import {Ingredient} from "../../core/models/receipt.model";
+import {filter, map, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-create-receipt-page',
@@ -11,12 +15,11 @@ export class CreateReceiptPageComponent implements OnInit {
   public receiptForm: FormGroup;
 
   // todo: get from api
-  public ingredients = [
-    'sugar',
-    'salt',
-  ];
+  public availableIngredients$: Observable<Ingredient[]>;
+  public usedIngredients: Ingredient[] = [];
 
-  constructor(private formBuilder: FormBuilder,) {
+  constructor(private formBuilder: FormBuilder,
+              private receiptService: ReceiptService) {
   }
 
   get ingredientsForm(): FormArray {
@@ -28,9 +31,16 @@ export class CreateReceiptPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.availableIngredients$ = this.receiptService.getIngredientsList().pipe(
+      /*map(ingredients => ingredients.filter(
+        ingredient => !this.usedIngredients.find(used => used.name === ingredient.name)
+      )),*/
+    );
+
     this.receiptForm = this.formBuilder.group({
-      title: new FormControl('dfgdg', Validators.required),
-      description: new FormControl('gf', Validators.required),
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
       ingredients: this.formBuilder.array([]),
       steps: this.formBuilder.array([]),
     });
@@ -69,5 +79,9 @@ export class CreateReceiptPageComponent implements OnInit {
     // if (this.receiptForm.valid) {
       console.log(this.receiptForm.value);
     // }
+  }
+
+  selectedIngredient($event: Event) {
+    console.log($event);
   }
 }

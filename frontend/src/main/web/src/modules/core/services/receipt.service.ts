@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
-import {Receipt} from "../models/receipt.model";
+import {Ingredient, Receipt} from "../models/receipt.model";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ReceiptService {
 
-  private url: string = "https://recipes300.herokuapp.com/";
+  private url = 'https://recipes300.herokuapp.com/';
 
   // delete after backend is connected
   private stubReceipts: Receipt[] = [
@@ -109,13 +109,16 @@ export class ReceiptService {
   }
 
   // TODO: from, quantity
-  // TODO: add url! + dont forget to change to this method in component
   public getReceiptList(): Observable<Receipt[]> {
-    return this.http.get<Receipt[]>(this.url +"api/recipes");
+    return this.http.get<Receipt[]>(this.url + 'api/recipes');
   }
 
   public getStubReceipts(): Observable<Receipt[]> {
     return of(this.stubReceipts);
+  }
+
+  public getIngredientsList(): Observable<Ingredient[]> {
+    return this.http.get<Ingredient[]>(this.url + 'api/ingredients');
   }
 
   public getStubReceipt(id: string): Observable<Receipt> {
@@ -123,7 +126,7 @@ export class ReceiptService {
   }
 
   public getReceipt(id: string): Observable<Receipt> {
-    return this.http.get<Receipt>(this.url +"api/recipe/"+id);
+    return this.http.get<Receipt>(this.url + 'api/recipe/' +id);
   }
 
 }
