@@ -13,5 +13,9 @@ public interface RecipeService {
 
     RecipeWithContent getRecipeById(Long id);
 
+    List<Recipe> getRecipesByCategory(String category);
+
     List<Recipe> getAllRecipes();
+
+    List<Recipe> searchByString(String searchStr);
 }

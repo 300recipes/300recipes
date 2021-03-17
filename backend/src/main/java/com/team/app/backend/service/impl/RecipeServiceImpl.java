@@ -42,7 +42,17 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public List<Recipe> getRecipesByCategory(String category) {
+        return recipeDao.getRecipesByCategory(category);
+    }
+
+    @Override
     public List<Recipe> getAllRecipes() {
         return recipeDao.getAll();
+    }
+
+    @Override
+    public List<Recipe> searchByString(String searchStr) {
+        return recipeDao.getRecipesBySearchStr(searchStr);
     }
 }

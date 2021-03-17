@@ -57,4 +57,19 @@ public class RecipeDaoImpl implements RecipeDao {
         return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id",
                 recipeRowMapper);
     }
+
+    @Override
+    public List<Recipe> getRecipesByCategory(String category) {
+        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id INNER JOIN rec_to_categ rtc ON r.id = rtc.rec_id INNER JOIN recipe_categories cat ON cat.id = rtc.cat_id where cat.name = ?",
+                new Object[] { category },
+                recipeRowMapper);    }
+
+    @Override
+    public List<Recipe> getRecipesBySearchStr(String searchStr) {
+        searchStr="%"+searchStr+"%";
+
+        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE LOWER(r.title) like ? or r.description like ?;",
+                new Object[] { searchStr,searchStr },
+                recipeRowMapper);
+    }
 }

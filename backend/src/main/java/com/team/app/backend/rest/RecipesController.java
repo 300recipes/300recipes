@@ -21,6 +21,17 @@ public class RecipesController {
         return recipeService.getAllRecipes();
     }
 
+
+    @GetMapping("/recipes/{category}")
+    public List<Recipe> findRecipesByCategory(@PathVariable("category") String category){
+        return recipeService.getRecipesByCategory(category);
+    }
+
+    @GetMapping("/recipes/search/{searchStr}")
+    public List<Recipe> findRecipesByString(@PathVariable("searchStr") String searchStr){
+        return recipeService.searchByString(searchStr);
+    }
+
     @GetMapping("/recipe/{id}")
     public RecipeWithContent findRecipe(@PathVariable("id") long id){
         return recipeService.getRecipeById(id);
