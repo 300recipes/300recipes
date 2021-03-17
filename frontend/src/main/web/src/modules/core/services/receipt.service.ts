@@ -129,4 +129,8 @@ export class ReceiptService {
     return this.http.get<Receipt>(this.url + 'api/recipe/' +id);
   }
 
+  public searchRecipes(value: string): Observable<Receipt[]>{
+    return this.http.get<Receipt[]>(this.url + 'api/recipes/search/'+value);
+  }
+
 }

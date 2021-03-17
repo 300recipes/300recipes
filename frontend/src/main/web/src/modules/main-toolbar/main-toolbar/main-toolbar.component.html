@@ -9,8 +9,13 @@
             [routerLink]="'/receipts/create'">New</span>
     </span>
   </div>
+
+  <span>
+    <input [(ngModel)]="term" (keyup.enter)="search()">
+    <button (click)="search()">🔍</button>
+  </span>
+
   <span *ngIf="!show()" (click)="openSignIn()">Sign in</span>
   <span *ngIf="!show()" (click)="openSignUp()">Sign up</span>
-  <span style="background-color: limegreen" *ngIf="show()" (click)="add()">Add</span>
   <span *ngIf="show()" (click)="signOut()">Sign out</span>
 </div>
