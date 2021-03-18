@@ -11,6 +11,8 @@ public interface RecipeService {
 
     void addRecipe();
 
+    void approveRecipe(Long id);
+
     RecipeWithContent getRecipeById(Long id);
 
     List<Recipe> getRecipesByCategory(String category);
