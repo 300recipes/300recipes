@@ -1,5 +1,7 @@
 package com.team.app.backend.service.impl;
 
+import com.team.app.backend.dto.RecipeCreateDto;
+import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.dao.IngredientsDao;
 import com.team.app.backend.persistance.dao.RecipeDao;
 import com.team.app.backend.persistance.dao.RecipeStepDao;
@@ -32,8 +34,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void addRecipe() {
-
+    public void addRecipe(RecipeCreateDto recipeCreateDto) {
+        //TODO: ADD
+        RecipeWithContent recipe = new RecipeWithContent();
+        recipe.setIngredients(recipeCreateDto.getIngredients());
+        recipeDao.add(recipe);
     }
 
     @Override
@@ -59,5 +64,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> searchByString(String searchStr) {
         return recipeDao.getRecipesBySearchStr(searchStr);
+    }
+
+    @Override
+    public List<Recipe> findFilteredRecipe(RecipeFilterDto recipeFilterDto) {
+        return recipeDao.findFilteredRecipe(recipeFilterDto);
     }
 }

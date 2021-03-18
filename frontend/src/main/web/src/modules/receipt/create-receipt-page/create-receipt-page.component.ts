@@ -78,6 +78,8 @@ export class CreateReceiptPageComponent implements OnInit {
   public onSubmit() {
     // if (this.receiptForm.valid) {
       console.log(this.receiptForm.value);
+      // TODO: MAKE Recept from receiptForm and post
+      // this.receiptService.addRecipe(this.receiptForm.value)
     // }
   }
 

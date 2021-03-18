@@ -1,5 +1,7 @@
 package com.team.app.backend.service;
 
+import com.team.app.backend.dto.RecipeCreateDto;
+import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
 
@@ -9,7 +11,7 @@ public interface RecipeService {
 
     void deleteRecipe(Long id);
 
-    void addRecipe();
+    void addRecipe(RecipeCreateDto recipeCreateDto);
 
     void approveRecipe(Long id);
 
@@ -20,4 +22,6 @@ public interface RecipeService {
     List<Recipe> getAllRecipes();
 
     List<Recipe> searchByString(String searchStr);
+
+    List<Recipe> findFilteredRecipe(RecipeFilterDto recipeFilterDto);
 }
