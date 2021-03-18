@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
 
-import {Category, Ingredient, Receipt} from "../models/receipt.model";
+import {Category, Ingredient, Receipt, SearchReceipt} from "../models/receipt.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map} from "rxjs/operators";
 
@@ -72,6 +72,10 @@ export class ReceiptService {
     return this.http.post(this.url + 'api/recipes/add', JSON.stringify(receipt), this.httpOptions).pipe(
       map(data => console.log(JSON.stringify(data)))
     );
+  }
+
+  public searchReceipts(search: SearchReceipt) {
+    console.log(search);
   }
 
 }

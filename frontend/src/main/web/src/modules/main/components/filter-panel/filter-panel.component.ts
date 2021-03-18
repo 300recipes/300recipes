@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ReceiptService} from "../../../core/services/receipt.service";
-import {Category, Ingredient} from "../../../core/models/receipt.model";
+import {Category, Ingredient, SearchReceipt} from "../../../core/models/receipt.model";
 import {DropdownItem} from "../dropdown/dropdown.component";
 
 @Component({
@@ -11,6 +11,8 @@ import {DropdownItem} from "../dropdown/dropdown.component";
 export class FilterPanelComponent implements OnInit {
 
   // TODO: fix styles
+  // TODO: fix id (not coming from backend)
+  // TODO: add query to search recipe form toolbar
   constructor(private receiptService: ReceiptService) { }
 
   public ingredients: DropdownItem[] = [];
@@ -56,5 +58,15 @@ export class FilterPanelComponent implements OnInit {
 
   removeCategory(item: DropdownItem): void {
     this.selectedCategories = this.selectedCategories.filter(sel => sel.label !== item.label);
+  }
+
+  public search() {
+    const search: SearchReceipt = {
+      category: (this.selectedCategories && this.selectedCategories.length) ?
+        this.selectedCategories.map(s => s.id) : null,
+      ingredients: (this.selectedIngredients && this.selectedIngredients.length) ?
+        this.selectedIngredients.map(s => s.id) : null,
+    };
+    this.receiptService.searchReceipts(search);
   }
 }
