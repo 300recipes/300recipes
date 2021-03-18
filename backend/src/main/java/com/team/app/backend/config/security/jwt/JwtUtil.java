@@ -16,7 +16,7 @@ public class JwtUtil {
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
-                .setSubject(format("%s,%s", user.getId(), user.getUsername()))
+                .setSubject(format("%s,%s,%s", user.getId(), user.getUsername(), user.getRole().getName()))
                 .setIssuer(ISSUER)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) // 1 week
@@ -40,6 +40,15 @@ public class JwtUtil {
                 .getBody();
 
         return claims.getSubject().split(",")[1];
+    }
+
+    public String getRole(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject().split(",")[2];
     }
 
     public Date getExpirationDate(String token) {

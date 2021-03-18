@@ -25,4 +25,7 @@ public interface RecipeDao {
 
     List<Recipe> findFilteredRecipe(RecipeFilterDto recipeFilterDto);
 
+    void approve(Long id);
+
+
 }

@@ -13,6 +13,8 @@ public interface RecipeService {
 
     void addRecipe(RecipeCreateDto recipeCreateDto);
 
+    void approveRecipe(Long id);
+
     RecipeWithContent getRecipeById(Long id);
 
     List<Recipe> getRecipesByCategory(String category);

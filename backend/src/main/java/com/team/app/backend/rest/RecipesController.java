@@ -6,13 +6,14 @@ import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.dto.UserRegistrationDto;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
+import com.team.app.backend.persistance.model.Role;
 import com.team.app.backend.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -23,9 +24,7 @@ public class RecipesController {
     RecipeService recipeService;
 
     @GetMapping("/recipes")
-    public List<Recipe> findAllRecipes(){
-        return recipeService.getAllRecipes();
-    }
+    public List<Recipe> findAllRecipes(){ return recipeService.getAllRecipes(); }
 
     @PostMapping("/recipes/add")
     public ResponseEntity addRecipe(@RequestBody @Valid RecipeCreateDto recipeCreateDto){
@@ -53,6 +52,12 @@ public class RecipesController {
     @GetMapping("/recipe/{id}")
     public RecipeWithContent findRecipe(@PathVariable("id") long id){
         return recipeService.getRecipeById(id);
+    }
+
+    @RolesAllowed(Role.ADMIN)
+    @PostMapping("/recipe/approve/{id}")
+    public void approveRecipe(@PathVariable("id") long id){
+        recipeService.approveRecipe(id);
     }
 
 }

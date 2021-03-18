@@ -86,22 +86,22 @@ public class RecipeDaoImpl implements RecipeDao {
                 "FROM recipes r INNER JOIN users u ON r.author_id = u.id \n" +
                 "INNER JOIN ingred_to_rec itc ON itc.rec_id = r.id\n" +
                 "INNER JOIN rec_to_categ rtc ON rtc.rec_id = r.id\n" +
-                "WHERE (LOWER(r.title) like :query or LOWER(r.description) like :query) \n" ;
+                "WHERE (LOWER(r.title) like :query or LOWER(r.description) like :query) \n";
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        if (recipeFilterDto.getQuery()!=null){
-            parameters.addValue("query", "%"+recipeFilterDto.getQuery()+"%");
-        }else{
+        if (recipeFilterDto.getQuery() != null) {
+            parameters.addValue("query", "%" + recipeFilterDto.getQuery() + "%");
+        } else {
             parameters.addValue("query", "%%");
         }
         List<Integer> intList = new ArrayList<>();
-        if (recipeFilterDto.getCategory()!= null){
-            for(String s : recipeFilterDto.getCategory()) intList.add(Integer.valueOf(s));
+        if (recipeFilterDto.getCategory() != null) {
+            for (String s : recipeFilterDto.getCategory()) intList.add(Integer.valueOf(s));
             sql += "AND rtc.cat_id IN (:categories)\n";
         }
         parameters.addValue("categories", intList);
         intList.clear();
-        if (recipeFilterDto.getIngredients()!= null){
-            for(String s : recipeFilterDto.getIngredients()) intList.add(Integer.valueOf(s));
+        if (recipeFilterDto.getIngredients() != null) {
+            for (String s : recipeFilterDto.getIngredients()) intList.add(Integer.valueOf(s));
             sql += "AND itc.ingr_id IN (:ingredients)";
 
         }
@@ -111,5 +111,15 @@ public class RecipeDaoImpl implements RecipeDao {
         return template.query(sql,
                 parameters,
                 recipeRowMapper);
+
+    }
+
+    @Override
+    public void approve(Long id) {
+        jdbcTemplate.update(
+                "UPDATE recipes SET approved = ? WHERE id = ?",
+                true,
+                id
+        );
     }
 }

@@ -42,6 +42,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public void approveRecipe(Long id){
+        recipeDao.approve(id);
+    }
+
+    @Override
     public RecipeWithContent getRecipeById(Long id) {
         return new RecipeWithContent(recipeDao.get(id),ingredientsDao.getRecipes(id),recipeStepDao.getRecipes(id));
     }
