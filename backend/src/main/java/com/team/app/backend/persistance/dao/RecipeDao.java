@@ -1,5 +1,7 @@
 package com.team.app.backend.persistance.dao;
 
+import com.team.app.backend.dto.RecipeCreateDto;
+import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
 
@@ -9,7 +11,7 @@ public interface RecipeDao {
 
     void add(Recipe recipe);
 
-    void update(Recipe recipe);
+    void update(RecipeWithContent recipe);
 
     void delete(Long id);
 
@@ -20,5 +22,7 @@ public interface RecipeDao {
     List<Recipe> getRecipesByCategory(String category);
 
     List<Recipe> getRecipesBySearchStr(String searchStr);
+
+    List<Recipe> findFilteredRecipe(RecipeFilterDto recipeFilterDto);
 
 }
