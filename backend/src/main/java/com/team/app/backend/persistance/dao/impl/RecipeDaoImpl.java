@@ -72,4 +72,13 @@ public class RecipeDaoImpl implements RecipeDao {
                 new Object[] { searchStr,searchStr },
                 recipeRowMapper);
     }
+
+    @Override
+    public void approve(Long id) {
+        jdbcTemplate.update(
+                "UPDATE recipes SET approved = ? WHERE id = ?",
+                true,
+                id
+        );
+    }
 }

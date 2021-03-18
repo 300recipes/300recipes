@@ -21,4 +21,6 @@ public interface RecipeDao {
 
     List<Recipe> getRecipesBySearchStr(String searchStr);
 
+    void approve(Long id);
+
 }
