@@ -4,11 +4,22 @@
   /*background-color: rgba(0, 0, 0, 0.5);*/
 }
 
-.landing-page .receipts-list {
+.landing-page .content {
   margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.content .receipts-list {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+
+.content .filter-panel {
+  background-color: white;
 }
 

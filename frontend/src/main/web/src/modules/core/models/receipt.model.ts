@@ -10,6 +10,15 @@ export interface Receipt {
   steps?: ReceiptStep[];
 }
 
+export interface ReceiptStep {
+  id?: string;
+  recipeId?: string;
+  orderNumber: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
 export interface Ingredient {
   recipeId?: string;
   ingredientId?: string;
@@ -18,11 +27,13 @@ export interface Ingredient {
   amount: string;
 }
 
-export interface ReceiptStep {
-  id?: string;
-  recipeId?: string;
-  orderNumber: number;
-  title: string;
-  description: string;
-  imageUrl: string;
+export interface Category {
+  id: string;
+  name: string;
+}
+
+export interface SearchReceipt {
+  query?: string;
+  ingredients?: string[];
+  category?: string[];
 }

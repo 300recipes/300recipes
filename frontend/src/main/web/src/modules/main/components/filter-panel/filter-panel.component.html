@@ -1,0 +1,30 @@
+<div class="filter-panel">
+
+  <div class="section">
+    <app-dropdown (selectedItem)="selectIngredient($event)"
+                  [items]="getAvailableIngredients()"
+                  [width]="180"
+                  label="Select ingredient:"></app-dropdown>
+
+    <div class="selected" *ngIf="selectedIngredients?.length">
+      <div *ngFor="let ing of selectedIngredients" class="item">
+        <span>{{ing.label}}</span>
+        <span class="right" (click)="removeIngredient(ing)">X</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <app-dropdown (selectedItem)="selectCategory($event)"
+                  [items]="getAvailableCategories()"
+                  [width]="180"
+                  label="Select category:"></app-dropdown>
+
+    <div class="selected" *ngIf="selectedCategories?.length">
+      <div *ngFor="let ing of selectedCategories" class="item">
+        <span>{{ing.label}}</span>
+        <span class="right" (click)="removeCategory(ing)">X</span>
+      </div>
+    </div>
+  </div>
+</div>

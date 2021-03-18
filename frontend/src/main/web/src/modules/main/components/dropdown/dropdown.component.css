@@ -1,0 +1,27 @@
+.dropdown {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background-color: white;
+  border-radius: 2px;
+  padding: 2px 5px;
+  position: relative;
+}
+
+.dropdown .items {
+  position: absolute;
+  min-width: 100%;
+  margin-left: -5px;
+  z-index: 100;
+  top: 100%;
+  background-color: white;
+  border: 1px solid grey;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.items .item {
+  background-color: white;
+  border-bottom: 1px solid grey;
+}

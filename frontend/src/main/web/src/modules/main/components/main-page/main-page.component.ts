@@ -10,6 +10,7 @@ import {Receipt} from "../../../core/models/receipt.model";
 })
 
 export class MainPageComponent {
+  // tslint:disable-next-line:variable-name
   public _receiptList$: Observable<Receipt[]> = this.receiptService.getReceiptList();
 
   constructor(private receiptService: ReceiptService) { }

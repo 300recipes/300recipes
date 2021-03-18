@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
-import {Ingredient, Receipt} from "../models/receipt.model";
+import {Category, Ingredient, Receipt} from "../models/receipt.model";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -119,6 +119,20 @@ export class ReceiptService {
 
   public getIngredientsList(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(this.url + 'api/ingredients');
+  }
+
+  public getCategoriesList(): Observable<Category[]> {
+    return of([
+      {
+        id: '1',
+        name: 'Category 1'
+      },
+      {
+        id: '2',
+        name: 'Category 2'
+      },
+    ]);
+    // return this.http.get<Category[]>(this.url + 'api/categories');
   }
 
   public getStubReceipt(id: string): Observable<Receipt> {

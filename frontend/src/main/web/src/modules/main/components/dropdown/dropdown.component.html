@@ -1,0 +1,10 @@
+<div class="dropdown" [style.width]="width + 'px'">
+  <span (click)="opened = !opened">{{label}}</span>
+  <div *ngIf="opened" class="items">
+    <div *ngFor="let item of items"
+         class="item"
+         (click)="itemClicked(item)">
+      {{item.label}}
+    </div>
+  </div>
+</div>
