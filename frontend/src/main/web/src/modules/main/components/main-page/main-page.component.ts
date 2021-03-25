@@ -11,7 +11,7 @@ import {Receipt, SearchReceipt} from "../../../core/models/receipt.model";
 
 export class MainPageComponent implements OnInit {
   // tslint:disable-next-line:variable-name
-  public _receiptList$: Observable<Receipt[]> = this.receiptService.getReceiptList();
+  //public _receiptList$: Observable<Receipt[]> = this.receiptService.getReceiptList();
 
   public receipts: Receipt[] = [];
 

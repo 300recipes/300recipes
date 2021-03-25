@@ -2,13 +2,7 @@
 
   <div class="content">
     <div class="receipts-list">
-      <app-receipt-list-item *ngFor="let receipt of (_receiptList$ | async)"
-                             [receipt]="receipt">
-      </app-receipt-list-item>
-      <app-receipt-list-item *ngFor="let receipt of (_receiptList$ | async)"
-                             [receipt]="receipt">
-      </app-receipt-list-item>
-      <app-receipt-list-item *ngFor="let receipt of (_receiptList$ | async)"
+      <app-receipt-list-item *ngFor="let receipt of receipts"
                              [receipt]="receipt">
       </app-receipt-list-item>
     </div>
