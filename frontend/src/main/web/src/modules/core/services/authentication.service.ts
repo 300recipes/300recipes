@@ -17,6 +17,7 @@ export class AuthenticationService {
       observe: 'response'
     })
   };
+  
 
   private url = "https://recipes300.herokuapp.com/api/";
 
@@ -63,7 +64,7 @@ export class AuthenticationService {
 
     //localStorage.setItem('userData', "token");
     console.log(userInfo);
-    return this.http.post(this.url + 'login', JSON.stringify(userInfo), this.httpOptions)
+    return this.http.post<TokenResponse>(this.url + 'login', JSON.stringify(userInfo), this.httpOptions)
     .pipe(
         map(data => { 
           const tokenJSON: any = data.token;
@@ -81,6 +82,10 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
+}
+
+class TokenResponse{
+  token: string;
 }
 
 
