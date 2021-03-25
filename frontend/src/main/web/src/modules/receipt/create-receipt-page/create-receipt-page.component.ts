@@ -76,11 +76,14 @@ export class CreateReceiptPageComponent implements OnInit {
   }
 
   public onSubmit() {
-    // if (this.receiptForm.valid) {
+     if (this.receiptForm.valid) {
       console.log(this.receiptForm.value);
-      // TODO: MAKE Recept from receiptForm and post
-      // this.receiptService.addRecipe(this.receiptForm.value)
-    // }
+
+      const receipt = this.receiptForm.value;
+      //console.log(receipt);
+
+      this.receiptService.addRecipe(receipt);
+    }
   }
 
   selectedIngredient($event: Event) {
