@@ -49,16 +49,19 @@ public class AuthenticationController {
             User user = (User) authenticate.getPrincipal();
 
             Map<Object, Object> response = new HashMap<>();
-            response.put("id", user.getId());
-            response.put("firstName", user.getFirstName());
-            response.put("lastName", user.getLastName());
-            response.put("email", user.getEmail());
-            response.put("image", user.getImage());
-            response.put("role", user.getRole());
-            response.put("username", request.getUsername());
-
             String token = jwtUtil.generateAccessToken(user);
             System.out.println("Generated token : " + token);
+
+            response.put("token", token);
+
+//            response.put("id", user.getId());
+//            response.put("firstName", user.getFirstName());
+//            response.put("lastName", user.getLastName());
+//            response.put("email", user.getEmail());
+//            response.put("image", user.getImage());
+//            response.put("role", user.getRole());
+//            response.put("username", request.getUsername());
+
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
