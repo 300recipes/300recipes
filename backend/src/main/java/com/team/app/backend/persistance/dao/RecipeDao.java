@@ -19,6 +19,8 @@ public interface RecipeDao {
 
     List<Recipe> getAll();
 
+    List<Recipe> getNotApproved();
+
     List<Recipe> getRecipesByCategory(String category);
 
     List<Recipe> getRecipesBySearchStr(String searchStr);

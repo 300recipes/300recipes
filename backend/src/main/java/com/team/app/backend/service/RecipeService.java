@@ -21,6 +21,8 @@ public interface RecipeService {
 
     List<Recipe> getAllRecipes();
 
+    List<Recipe> getNotApprovedRecipes();
+
     List<Recipe> searchByString(String searchStr);
 
     List<Recipe> findFilteredRecipe(RecipeFilterDto recipeFilterDto);

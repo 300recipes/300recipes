@@ -60,4 +60,10 @@ public class RecipesController {
         recipeService.approveRecipe(id);
     }
 
+    @RolesAllowed(Role.ADMIN)
+    @GetMapping("/recipes/notapproved")
+    public List<Recipe> getNotApproved(){
+        return recipeService.getNotApprovedRecipes();
+    }
+
 }

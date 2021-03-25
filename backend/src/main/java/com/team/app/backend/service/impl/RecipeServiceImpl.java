@@ -62,6 +62,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public List<Recipe> getNotApprovedRecipes() {
+        return recipeDao.getNotApproved();
+    }
+
+    @Override
     public List<Recipe> searchByString(String searchStr) {
         return recipeDao.getRecipesBySearchStr(searchStr);
     }
