@@ -27,7 +27,7 @@ export class FilterPanelComponent implements OnInit {
   ngOnInit(): void {
     this.receiptService.getIngredientsList().subscribe(ingredients => {
       this.ingredients = ingredients.map(
-        ingredient => ({id: ingredient.ingredientId, label: ingredient.name}));
+        ingredient => ({id: ingredient.id, label: ingredient.name}));
     });
     this.receiptService.getCategoriesList().subscribe(categories => {
       this.categories = categories.map(

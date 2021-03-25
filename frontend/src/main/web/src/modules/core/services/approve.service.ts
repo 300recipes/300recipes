@@ -21,13 +21,15 @@ export class ApproveService {
   constructor(private http: HttpClient) { }
 
   public getReceiptListForApprove(): Observable<Receipt[]> {
-    // TODO change link from /recipes to /approve or similar after backend is connected 
-    return this.http.get<Receipt[]>(this.url + 'recipes');
+    // TODO change link from /recipes to /approve or similar after backend is connected
+    return this.http.get<Receipt[]>(this.url + 'recipes/notapproved');
+
+     // return this.http.get<Receipt[]>('http://localhost:8083/api/recipes/notapproved');
   }
 
   public approveRecipe(id: String): any {
     // TODO change it
-    return this.http.post(this.url + 'recipes/approve', JSON.stringify({ "id": id }), this.httpOptions).pipe(
+    return this.http.post(this.url + 'recipes/approve/' + id, this.httpOptions).pipe(
       map(data => console.log(JSON.stringify(data)))
     );
   }

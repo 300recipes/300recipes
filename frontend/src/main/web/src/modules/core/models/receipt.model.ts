@@ -21,7 +21,7 @@ export interface ReceiptStep {
 
 export interface Ingredient {
   recipeId?: string;
-  ingredientId?: string;
+  id?: string;
   name: string;
   measure: string;
   amount: string;
