@@ -41,17 +41,17 @@ export class ReceiptService {
   }
 
   public getCategoriesList(): Observable<Category[]> {
-    return of([
-      {
-        id: '1',
-        name: 'Category 1'
-      },
-      {
-        id: '2',
-        name: 'Category 2'
-      },
-    ]);
-    // return this.http.get<Category[]>(this.url + 'api/categories');
+    // return of([
+    //   {
+    //     id: '1',
+    //     name: 'Category 1'
+    //   },
+    //   {
+    //     id: '2',
+    //     name: 'Category 2'
+    //   },
+    // ]);
+     return this.http.get<Category[]>(this.url + 'api/categories');
   }
 
   public getStubReceipt(id: string): Observable<Receipt> {
@@ -74,13 +74,12 @@ export class ReceiptService {
     );
   }
 
-  public searchReceipts(search: SearchReceipt) {
-    console.log(search);
+  public searchReceipts(search: SearchReceipt): any {
+    //console.log('search' + search);
     // TODO: replace url for searching recipies
-    return this.http.post(this.url + 'api/recipes/add', JSON.stringify(search), this.httpOptions).pipe(
-      map(data => console.log(JSON.stringify(data)))
-    );
-
+    return this.http.post(this.url + 'api/recipes/filter', JSON.stringify(search), this.httpOptions).pipe(
+      map(data => console.log(JSON.stringify(data))
+    ));
   }
 
 }

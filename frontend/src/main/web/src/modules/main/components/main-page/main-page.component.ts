@@ -27,11 +27,11 @@ export class MainPageComponent implements OnInit {
 
   public search(s: SearchReceipt): void {
     console.log(s);
-    console.log("--");
+    console.log(' -- search');
 
 
 
-    this.receiptService.getReceiptList().subscribe(data => {
+    this.receiptService.searchReceipts(s).subscribe(data => {
       this.receipts = data;
     });
   }

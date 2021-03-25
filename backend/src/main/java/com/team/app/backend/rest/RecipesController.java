@@ -54,13 +54,13 @@ public class RecipesController {
         return recipeService.getRecipeById(id);
     }
 
-    @RolesAllowed(Role.ADMIN)
+    //@RolesAllowed(Role.ADMIN)
     @PostMapping("/recipe/approve/{id}")
     public void approveRecipe(@PathVariable("id") long id){
         recipeService.approveRecipe(id);
     }
 
-    @RolesAllowed(Role.ADMIN)
+    //@RolesAllowed(Role.ADMIN)
     @GetMapping("/recipes/notapproved")
     public List<Recipe> getNotApproved(){
         return recipeService.getNotApprovedRecipes();
