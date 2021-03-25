@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ReceiptService} from "../../../core/services/receipt.service";
 import {Category, Ingredient, SearchReceipt} from "../../../core/models/receipt.model";
 import {DropdownItem} from "../dropdown/dropdown.component";
@@ -12,14 +12,17 @@ export class FilterPanelComponent implements OnInit {
 
   // TODO: fix styles
   // TODO: fix id (not coming from backend)
-  // TODO: add query to search recipe form toolbar
   constructor(private receiptService: ReceiptService) { }
+
+  public term = '';
 
   public ingredients: DropdownItem[] = [];
   public selectedIngredients: DropdownItem[] = [];
 
   public categories: DropdownItem[] = [];
   public selectedCategories: DropdownItem[] = [];
+
+  @Output() onSearch = new EventEmitter<SearchReceipt>();
 
   ngOnInit(): void {
     this.receiptService.getIngredientsList().subscribe(ingredients => {
@@ -61,12 +64,13 @@ export class FilterPanelComponent implements OnInit {
   }
 
   public search() {
-    const search: SearchReceipt = {
+    const searchQuery: SearchReceipt = {
+      query: this.term || null,
       category: (this.selectedCategories && this.selectedCategories.length) ?
         this.selectedCategories.map(s => s.id) : null,
       ingredients: (this.selectedIngredients && this.selectedIngredients.length) ?
         this.selectedIngredients.map(s => s.id) : null,
     };
-    this.receiptService.searchReceipts(search);
+    this.onSearch.emit(searchQuery);
   }
 }

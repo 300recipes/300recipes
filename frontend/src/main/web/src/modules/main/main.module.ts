@@ -5,6 +5,7 @@ import { ReceiptItemListComponent } from './components/receipt-item/receipt-item
 import {RouterModule} from "@angular/router";
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -13,9 +14,10 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
   exports: [
     MainPageComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule
+    ]
 })
 export class MainModule { }

@@ -1,5 +1,9 @@
 <div class="filter-panel">
 
+  <span>
+    <input [(ngModel)]="term" (keyup.enter)="search()">
+  </span>
+
   <div class="section">
     <app-dropdown (selectedItem)="selectIngredient($event)"
                   [items]="getAvailableIngredients()"

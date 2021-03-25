@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthenticationService } from 'src/modules/core/services/authentication.service';
-import { ReceiptService } from 'src/modules/core/services/receipt.service';
-import { SignInComponent } from '../sign-in/sign-in.component';
-import { SignUpComponent } from '../sign-up/sign-up.component';
+import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthenticationService} from 'src/modules/core/services/authentication.service';
+import {SignInComponent} from '../sign-in/sign-in.component';
+import {SignUpComponent} from '../sign-up/sign-up.component';
+import {ReceiptService} from "../../core/services/receipt.service";
 
 @Component({
   selector: 'app-main-toolbar',
@@ -13,34 +13,37 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
 })
 export class MainToolbarComponent {
 
-  term: string;
+  @Input() term = '';
 
   constructor(private modalService: NgbModal,
-    private authenticationService: AuthenticationService,
-    private router: Router) { }
+              private authenticationService: AuthenticationService,
+              private receiptService: ReceiptService,
+              private router: Router) {
+  }
 
   openSignUp() {
-    this.modalService.open(SignUpComponent, { size: "sm" });
+    this.modalService.open(SignUpComponent, {size: "sm"});
   }
 
   openSignIn() {
     this.modalService.open(SignInComponent);
   }
 
-  signOut(){
+  signOut() {
     this.authenticationService.signout();
   }
 
-  add(){
+  add() {
 
   }
 
-  show(){
+  show() {
     return this.authenticationService.currentUserValue;
   }
 
-  search(){
-    this.router.navigate(['/receipts'], { queryParams: { search: this.term }, queryParamsHandling: 'merge' });
+  search() {
+
+    // this.router.navigate(['/receipts'], { queryParams: { search: this.term }, queryParamsHandling: 'merge' });
   }
 
 }
