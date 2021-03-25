@@ -28,7 +28,7 @@ export class MainToolbarComponent {
   }
 
   signOut(){
-    localStorage.removeItem('userData');
+    this.authenticationService.signout();
   }
 
   add(){

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as sha1 from 'js-sha1';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,16 @@ export class AuthenticationService {
 
   private url = "https://recipes300.herokuapp.com/api/";
 
-  constructor(private http: HttpClient) { }
+  private currentUserSubject: BehaviorSubject<any>; 
+
+  constructor(private http: HttpClient) { 
+    this.currentUserSubject = new BehaviorSubject<any>(
+      localStorage.getItem('userData') ? jwt_decode(localStorage.getItem('userData')) : undefined);
+  }
 
 
   public get currentUserValue() {
-    return localStorage.getItem('userData');
+    return this.currentUserSubject.value;
   }
 
 
@@ -56,9 +63,24 @@ export class AuthenticationService {
 
     //localStorage.setItem('userData', "token");
     console.log(userInfo);
-    return this.http.post(this.url + 'login', JSON.stringify(userInfo), this.httpOptions).pipe(
-        map(data => { localStorage.setItem('userData', JSON.stringify(data)) })
+    return this.http.post(this.url + 'login', JSON.stringify(userInfo), this.httpOptions)
+    .pipe(
+        map(data => { 
+          const tokenJSON: any = data.token;
+          
+          localStorage.setItem('userData', tokenJSON);
+          const userDecode = jwt_decode(tokenJSON);
+          this.currentUserSubject.next(userDecode);
+          return userDecode;
+        })
     );
   }
 
+  signout(){
+    localStorage.removeItem('userData');
+    this.currentUserSubject.next(null);
+  }
+
 }
+
+

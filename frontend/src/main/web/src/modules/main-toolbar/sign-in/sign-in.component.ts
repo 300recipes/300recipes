@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
   }
 
   logIn(){
-    this.authenticationService.signinUser(this.username,this.password).pipe(first())
+    this.authenticationService.signinUser(this.username,this.password)
     .subscribe(
         () => {
             alert("Signed in")
