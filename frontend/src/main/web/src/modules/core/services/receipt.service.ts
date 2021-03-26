@@ -67,7 +67,7 @@ export class ReceiptService {
   }
 
   public addRecipe(receipt: Receipt): any {
-    this.http.post(this.url + 'api/recipes/add', receipt);
+    //this.http.post(this.url + 'api/recipes/add', receipt);
     console.log(receipt);
     return this.http.post(this.url + 'api/recipes/add', JSON.stringify(receipt), this.httpOptions).pipe(
       map(data => console.log(JSON.stringify(data)))
