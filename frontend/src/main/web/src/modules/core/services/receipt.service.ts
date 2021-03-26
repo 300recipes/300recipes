@@ -78,7 +78,10 @@ export class ReceiptService {
     //console.log('search' + search);
     // TODO: replace url for searching recipies
     return this.http.post(this.url + 'api/recipes/filter', JSON.stringify(search), this.httpOptions).pipe(
-      map(data => console.log(JSON.stringify(data))
+      map(data => {
+        console.log(JSON.stringify(data));
+        return data;
+      }
     ));
   }
 
