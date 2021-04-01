@@ -12,6 +12,25 @@
       <textarea formControlName="description"></textarea>
     </div>
 
+    <div class="ingredients" formArrayName="categories">
+      <div class="header">
+        <span>Categories</span>
+        <div class="button" (click)="addCategory()">+</div>
+      </div>
+      <div *ngFor="let category of categoriesForm.controls; let i = index">
+        <div [formGroupName]="i" class="ingredient-row">
+          <!--span>{{i}}</span-->
+          <div class="button remove" (click)="removeCategory(i)">-</div>
+          <select formControlName="category">
+            <option *ngFor="let ing of (availableCategories$ | async)"
+                    [ngValue]="ing">
+              {{ ing.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="ingredients" formArrayName="ingredients">
       <div class="header">
         <span>Ingredients</span>
@@ -27,6 +46,7 @@
               {{ ing.name }}
             </option>
           </select>
+          <input type="number" formControlName="amount">
         </div>
       </div>
     </div>
@@ -43,6 +63,7 @@
             <input type="text" formControlName="title">
             <button class="button remove" (click)="removeStep(i)">-</button>
           </div>
+          <input type="text" formControlName="imageUrl">
           <textarea formControlName="description"></textarea>
         </div>
       </div>

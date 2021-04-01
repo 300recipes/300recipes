@@ -1,9 +1,9 @@
 
 export interface Receipt {
-  id: string;
+  id?: string;
   title: string;
   description: string;
-  author: string;
+  author?: string;
   imageUrl?: string;
   hashes?: string[];
   ingredients?: Ingredient[];
@@ -23,7 +23,7 @@ export interface Ingredient {
   recipeId?: string;
   id?: string;
   name: string;
-  measure: string;
+  measure?: string;
   amount: string;
 }
 

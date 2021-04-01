@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReceiptService} from "../../core/services/receipt.service";
 import {Observable} from "rxjs";
-import {Ingredient} from "../../core/models/receipt.model";
-import {filter, map, tap} from "rxjs/operators";
+import {Category, Ingredient, Receipt} from "../../core/models/receipt.model";
 
 @Component({
   selector: 'app-create-receipt-page',
@@ -14,9 +13,10 @@ export class CreateReceiptPageComponent implements OnInit {
 
   public receiptForm: FormGroup;
 
-  // todo: get from api
   public availableIngredients$: Observable<Ingredient[]>;
   public usedIngredients: Ingredient[] = [];
+
+  public availableCategories$: Observable<Category[]>;
 
   constructor(private formBuilder: FormBuilder,
               private receiptService: ReceiptService) {
@@ -24,6 +24,10 @@ export class CreateReceiptPageComponent implements OnInit {
 
   get ingredientsForm(): FormArray {
     return this.receiptForm.get('ingredients') as FormArray;
+  }
+
+  get categoriesForm(): FormArray {
+    return this.receiptForm.get('categories') as FormArray;
   }
 
   get stepsForm(): FormArray {
@@ -38,11 +42,15 @@ export class CreateReceiptPageComponent implements OnInit {
       )),*/
     );
 
+    this.availableCategories$ = this.receiptService.getCategoriesList();
+
+
     this.receiptForm = this.formBuilder.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       ingredients: this.formBuilder.array([]),
       steps: this.formBuilder.array([]),
+      categories: this.formBuilder.array([]),
     });
     this.receiptForm.updateValueAndValidity();
   }
@@ -55,12 +63,26 @@ export class CreateReceiptPageComponent implements OnInit {
     this.stepsForm.removeAt(i);
   }
 
+  public removeCategory(i: number) {
+    this.categoriesForm.removeAt(i);
+  }
+
+  public addCategory() {
+    this.categoriesForm.push(
+      this.formBuilder.group({
+        category: new FormControl(null),
+      })
+    );
+    this.receiptForm.updateValueAndValidity();
+    this.receiptForm.markAllAsTouched();
+  }
+
   public addStep() {
     this.stepsForm.push(
       this.formBuilder.group({
         title: new FormControl('', Validators.required),
         description: new FormControl('', Validators.required),
-        // todo: add image
+        imageUrl: new FormControl(''),
       }));
     this.receiptForm.updateValueAndValidity();
   }
@@ -68,7 +90,7 @@ export class CreateReceiptPageComponent implements OnInit {
   public addIngredient() {
     this.ingredientsForm.push(
       this.formBuilder.group({
-        quantity: new FormControl(1, Validators.required),
+        amount: new FormControl(1, Validators.required),
         ingredient: new FormControl(null, Validators.required),
       }));
     this.receiptForm.updateValueAndValidity();
@@ -76,13 +98,23 @@ export class CreateReceiptPageComponent implements OnInit {
   }
 
   public onSubmit() {
-     if (this.receiptForm.valid) {
-      console.log(this.receiptForm.value);
-
+    if (this.receiptForm.valid) {
       const receipt = this.receiptForm.value;
-      //console.log(receipt);
+      console.log(receipt);
 
-      this.receiptService.addRecipe(receipt);
+
+      const modified = {
+        title: receipt.title,
+        description: receipt.description,
+        categories: receipt.categories.map((val: {category: Category}) => val.category.id) as any,
+        steps: receipt.steps,
+        ingredients: receipt.ingredients.map((val: {amount: number, ingredient: Ingredient}) =>
+          ({amount: val.amount, id: val.ingredient.id})),
+      };
+
+      console.log(modified);
+
+      this.receiptService.addRecipe(modified as any);
     }
   }
 
