@@ -66,7 +66,7 @@ export class ReceiptService {
     return this.http.get<Receipt[]>(this.url + 'api/recipes/search/' + value);
   }
 
-  public addRecipe(receipt: Receipt): any {
+  public addRecipe(receipt: unknown): any {
     //this.http.post(this.url + 'api/recipes/add', receipt);
     console.log(receipt);
     return this.http.post(this.url + 'api/recipes/add', JSON.stringify(receipt), this.httpOptions).pipe(
