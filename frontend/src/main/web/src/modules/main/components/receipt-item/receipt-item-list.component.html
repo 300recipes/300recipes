@@ -1,8 +1,6 @@
 <div class="receipt">
   <div class="thumb">
-    <img src="{{receipt.imageUrl || 'assets/img/dish_thumb.png'}}"
-         [ngClass]="{'router-link-active': true}"
-         [routerLink]="receipt.id">
+    <img src="{{receipt.imageUrl || 'assets/img/dish_thumb.png'}}" [ngClass]="{'router-link-active': true}" [routerLink]="receipt.id">
   </div>
 
   <div class="info">
@@ -11,9 +9,7 @@
         {{hash}}
       </span>
     </div>
-    <div class="title single-line"
-         [ngClass]="{'router-link-active': true}"
-         [routerLink]="receipt.id">
+    <div class="title single-line" [ngClass]="{'router-link-active': true}" [routerLink]="receipt.id">
       {{receipt.title || 'Default title'}}
     </div>
     <div class="author single-line">{{receipt.author || 'Default author'}}
@@ -25,9 +21,11 @@
   <div class="actions">
     <div class="save">
     </div>
-    <div class="up">
+    <div (click)="like()" class="up align-middle">
+      <span class="align-middle">👍🏻</span>
     </div>
-    <div class="down">
+    <div (click)="dislike()" class="down align-middle">
+      <span class="align-middle">👎🏻</span>
     </div>
   </div>
 </div>

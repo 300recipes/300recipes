@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ReceiptService} from "../../../core/services/receipt.service";
-import {Observable} from "rxjs";
-import {Receipt, SearchReceipt} from "../../../core/models/receipt.model";
+import { ReceiptService } from "../../../core/services/receipt.service";
+import { Observable } from "rxjs";
+import { Receipt, SearchReceipt } from "../../../core/models/receipt.model";
 
 @Component({
   selector: 'app-landing-page',

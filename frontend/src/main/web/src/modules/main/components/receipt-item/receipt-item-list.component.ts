@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Receipt} from "../../../core/models/receipt.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { ReceiptService } from 'src/modules/core/services/receipt.service';
+import { Receipt } from "../../../core/models/receipt.model";
 
 @Component({
   selector: 'app-receipt-list-item',
@@ -8,4 +9,15 @@ import {Receipt} from "../../../core/models/receipt.model";
 })
 export class ReceiptItemListComponent {
   @Input() public receipt: Receipt;
+
+  constructor(private receiptService: ReceiptService) {
+  }
+
+  like() {
+    this.receiptService.setLike(this.receipt)
+  }
+
+  dislike() {
+    this.receiptService.setDislike(this.receipt)
+  }
 }

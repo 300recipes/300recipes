@@ -52,11 +52,13 @@
 }
 
 .up {
-  background-color: #55AF0F;
+  text-align: center;
+  cursor: pointer;
 }
 
 .down {
-  background-color: #AF0F0F;
+  text-align: center;
+  cursor: pointer;
 }
 
 .single-line {

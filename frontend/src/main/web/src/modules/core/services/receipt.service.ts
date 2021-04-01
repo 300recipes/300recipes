@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
+import { Observable, of } from "rxjs";
 
-import {Category, Ingredient, Receipt, SearchReceipt} from "../models/receipt.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import { Category, Ingredient, Receipt, SearchReceipt } from "../models/receipt.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 
 @Injectable({
@@ -51,7 +51,7 @@ export class ReceiptService {
     //     name: 'Category 2'
     //   },
     // ]);
-     return this.http.get<Category[]>(this.url + 'api/categories');
+    return this.http.get<Category[]>(this.url + 'api/categories');
   }
 
   public getStubReceipt(id: string): Observable<Receipt> {
@@ -82,7 +82,19 @@ export class ReceiptService {
         console.log(JSON.stringify(data));
         return data;
       }
-    ));
+      ));
   }
+
+  public setLike(receipt: Receipt) {
+    window.alert("LIKE " + receipt.title)
+  }
+
+  public setDislike(receipt: Receipt) {
+    window.alert("DISLIKE " + receipt.title)
+
+  }
+
+
+
 
 }
