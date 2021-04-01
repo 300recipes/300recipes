@@ -11,7 +11,7 @@ public interface RecipeService {
 
     void deleteRecipe(Long id);
 
-    void addRecipe(RecipeCreateDto recipeCreateDto);
+    void addRecipe(RecipeCreateDto recipeCreateDto ,long user_id);
 
     void approveRecipe(Long id);
 

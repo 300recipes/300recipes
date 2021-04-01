@@ -1,6 +1,5 @@
 package com.team.app.backend.persistance.dao;
 
-import com.team.app.backend.dto.RecipeCreateDto;
 import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
@@ -9,9 +8,9 @@ import java.util.List;
 
 public interface RecipeDao {
 
-    void add(Recipe recipe);
+    long add(Recipe recipe, Long user_id);
 
-    void update(RecipeWithContent recipe);
+    void update(RecipeWithContent recipe );
 
     void delete(Long id);
 

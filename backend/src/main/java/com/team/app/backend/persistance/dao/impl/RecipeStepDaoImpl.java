@@ -1,5 +1,7 @@
 package com.team.app.backend.persistance.dao.impl;
 
+import com.team.app.backend.dto.IngredientDto;
+import com.team.app.backend.dto.RecipeStepDto;
 import com.team.app.backend.persistance.dao.RecipeStepDao;
 import com.team.app.backend.persistance.dao.mappers.IngredientRowMapper;
 import com.team.app.backend.persistance.dao.mappers.RecipeStepRowMapper;
@@ -36,5 +38,19 @@ public class RecipeStepDaoImpl implements RecipeStepDao {
         return jdbcTemplate.query("SELECT id, rec_id, title, description, image_url, order_num FROM recipe_step where rec_id = ?",
                 new Object[]{id},
                 recipeStepRowMapper);
+    }
+
+    @Override
+    public void addRecipeSteps(long rec_id, List<RecipeStepDto> stepDtos) {
+        for (int i = 0; i < stepDtos.size(); i++) {
+            RecipeStepDto stepDto = stepDtos.get(i);
+            jdbcTemplate.update(
+                    "INSERT INTO recipe_step( rec_id, title, description, image_url, order_num) VALUES ( ?, ?, ?, ?, ?)",
+                    rec_id,
+                    stepDto.getTitle(),
+                    stepDto.getDescription(),
+                    stepDto.getImageUrl(),
+                    i);
+        }
     }
 }

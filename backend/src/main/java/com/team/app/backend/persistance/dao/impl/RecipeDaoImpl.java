@@ -1,20 +1,20 @@
 package com.team.app.backend.persistance.dao.impl;
 
-import com.team.app.backend.dto.RecipeCreateDto;
 import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.dao.RecipeDao;
 import com.team.app.backend.persistance.dao.mappers.RecipeRowMapper;
-import com.team.app.backend.persistance.dao.mappers.UserRowMapper;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +33,21 @@ public class RecipeDaoImpl implements RecipeDao {
 
 
     @Override
-    public void add(Recipe recipe) {
-
+    public long add(Recipe recipe, Long user_id) {
+        String sql="INSERT INTO recipes( title, description, image, author_id, approved) VALUES (?, ?, ?, ?, ?);";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id"});
+                    ps.setString(1, recipe.getTitle());
+                    ps.setString(2, recipe.getDescription());
+                    ps.setString(3, recipe.getImageUrl());
+                    ps.setLong(4, user_id);
+                    ps.setBoolean(5, false);
+                    return ps;
+                },
+                keyHolder);
+        return  keyHolder.getKey().longValue();
     }
 
     @Override
@@ -99,19 +112,20 @@ public class RecipeDaoImpl implements RecipeDao {
         } else {
             parameters.addValue("query", "%%");
         }
-        List<Integer> intList = new ArrayList<>();
+        List<Integer> catList = new ArrayList<>();
         if (recipeFilterDto.getCategory() != null) {
-            for (String s : recipeFilterDto.getCategory()) intList.add(Integer.valueOf(s));
-            sql += "AND rtc.cat_id IN (:categories)\n";
+            System.out.println(recipeFilterDto.getCategory());
+            for (String s : recipeFilterDto.getCategory()) catList.add(Integer.valueOf(s));
+            sql += "AND rtc.cat_id IN (:categories)";
         }
-        parameters.addValue("categories", intList);
-        intList.clear();
+        parameters.addValue("categories", catList);
+        List<Integer> ingrList = new ArrayList<>();
         if (recipeFilterDto.getIngredients() != null) {
-            for (String s : recipeFilterDto.getIngredients()) intList.add(Integer.valueOf(s));
+            for (String s : recipeFilterDto.getIngredients()) ingrList.add(Integer.valueOf(s));
             sql += "AND itc.ingr_id IN (:ingredients)";
 
         }
-        parameters.addValue("ingredients", intList);
+        parameters.addValue("ingredients", ingrList);
         NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate.getDataSource());
 
         return template.query(sql,

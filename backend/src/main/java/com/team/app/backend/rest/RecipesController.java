@@ -1,6 +1,7 @@
 package com.team.app.backend.rest;
 
 
+import com.team.app.backend.config.security.jwt.JwtUtil;
 import com.team.app.backend.dto.RecipeCreateDto;
 import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.dto.UserRegistrationDto;
@@ -22,14 +23,18 @@ public class RecipesController {
 
     @Autowired
     RecipeService recipeService;
+    @Autowired
+    JwtUtil jwtUtil;
 
     @GetMapping("/recipes")
     public List<Recipe> findAllRecipes(){ return recipeService.getAllRecipes(); }
 
     @PostMapping("/recipes/add")
     public ResponseEntity addRecipe(@RequestBody @Valid RecipeCreateDto recipeCreateDto){
-
-        recipeService.addRecipe(recipeCreateDto);
+        System.out.println("add " + recipeCreateDto.getTitle());
+        System.out.println(jwtUtil.getUserId("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4LGFzZGY1LFJfQURNSU4iLCJpc3MiOiJleGFtcGxlLmlvIiwiaWF0IjoxNjE3MzEwNDM4LCJleHAiOjE2MTgxNzQ0Mzh9.rTbmmxeuv-51Ijfzi0S7SdoqWo0PwoCXtbI73qwhfiNcfWCfuFpDjd63S09kH6" +
+                "vesryj0tCVPzZuUgtKLKUOcw"));
+        recipeService.addRecipe(recipeCreateDto,11L);
         return ResponseEntity.ok().body("Recipe was successfully added");
     }
 

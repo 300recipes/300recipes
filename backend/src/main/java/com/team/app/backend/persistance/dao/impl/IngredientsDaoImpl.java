@@ -1,5 +1,6 @@
 package com.team.app.backend.persistance.dao.impl;
 
+import com.team.app.backend.dto.IngredientDto;
 import com.team.app.backend.persistance.dao.IngredientsDao;
 import com.team.app.backend.persistance.dao.mappers.IngredientRowMapper;
 import com.team.app.backend.persistance.dao.mappers.IngredientToRecipeRowMapper;
@@ -39,5 +40,18 @@ public class IngredientsDaoImpl implements IngredientsDao {
         return jdbcTemplate.query("SELECT ingrec.rec_id, ingrec.ingr_id, ingrec.measure, ingrec.amount, i.name FROM ingred_to_rec ingrec INNER JOIN ingredients i ON i.id = ingrec.ingr_id  where ingrec.rec_id = ?",
                 new Object[]{id},
                 ingredientToRecipeRowMapper);
+    }
+
+    @Override
+    public void addRecipeIngred(long rec_id, List<IngredientDto> ingredients) {
+        for (IngredientDto ingr:ingredients) {
+            jdbcTemplate.update(
+                    "INSERT INTO ingred_to_rec( rec_id, ingr_id, measure, amount) VALUES ( ?, ?, ?, ?)",
+                    rec_id,
+                    ingr.getId(),
+                    ingr.getMeasure(),
+                    ingr.getAmount()
+            );
+        }
     }
 }
