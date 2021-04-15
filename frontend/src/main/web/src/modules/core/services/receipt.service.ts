@@ -4,6 +4,7 @@ import { Observable, of } from "rxjs";
 import { Category, Ingredient, Receipt, SearchReceipt } from "../models/receipt.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 
 @Injectable({
@@ -19,6 +20,10 @@ export class ReceiptService {
       observe: 'response'
     })
   };
+
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
   // delete after backend is connected
   private stubReceipts: Receipt[] = [
   ];
@@ -110,7 +115,38 @@ export class ReceiptService {
 
   }
 
+  // Gets called when the user clicks on submit to upload the image
+  public onUpload(selectedFile: File ): void {
+    console.log(selectedFile);
+    // FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', selectedFile, selectedFile.name);
+    console.log(uploadImageData);
+    // Make a call to the Spring Boot Application to save the image
+    this.http.post('http://localhost:8083/api/image/upload', uploadImageData, { observe: 'response' })
+      .subscribe((response) => {
+          if (response.status === 200) {
+            alert( 'Image uploaded successfully');
+          } else {
+            alert( 'Image not uploaded successfully');
+          }
+        }
+      );
+  }
 
+  // Gets called when the user clicks on retieve image button to get the image from back end
+  public getImage(imageName: string): any {
+    // Make a call to Sprinf Boot to get the Image Bytes.
+    this.http.get('http://localhost:8083/api/image/get/' + imageName)
+      .subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
+    return this.retrievedImage;
+  }
 
 
 }

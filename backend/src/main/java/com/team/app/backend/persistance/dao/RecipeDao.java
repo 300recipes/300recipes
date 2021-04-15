@@ -1,6 +1,7 @@
 package com.team.app.backend.persistance.dao;
 
 import com.team.app.backend.dto.RecipeFilterDto;
+import com.team.app.backend.persistance.model.Image;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
 
@@ -28,5 +29,7 @@ public interface RecipeDao {
 
     void approve(Long id);
 
+    void saveImage(Image img);
 
+    Image getImage(String name);
 }

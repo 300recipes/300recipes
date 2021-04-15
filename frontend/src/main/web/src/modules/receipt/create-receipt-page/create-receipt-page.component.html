@@ -12,8 +12,25 @@
       <textarea formControlName="description"></textarea>
     </div>
     <div class="form-field">
-      <span>Image url</span>
-      <textarea formControlName="imageUrl"></textarea>
+      <div class="container row">
+        <div class="col-md-12">
+          <h1>Upload Image</h1>
+        </div>
+      </div>
+      <div class="container row">
+        <div class="col-md-6">
+          <input type="file" (change)="onFileChanged($event)">
+        </div>
+        <div class="col-md-6">
+          <input type="button" (click)="onUpload()" value="upload">
+        </div>
+      </div>
+      <hr />
+      <div class="container row">
+        <div class="col-md-12">
+          <div *ngIf=message>{{message}}</div>
+        </div>
+      </div>
     </div>
     <div class="ingredients" formArrayName="categories">
       <div class="header">

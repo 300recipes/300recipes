@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {ReceiptService} from "../../core/services/receipt.service";
 import {Observable} from "rxjs";
 import {Category, Ingredient, Receipt} from "../../core/models/receipt.model";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-receipt-page',
@@ -10,6 +11,12 @@ import {Category, Ingredient, Receipt} from "../../core/models/receipt.model";
   styleUrls: ['./create-receipt-page.component.css']
 })
 export class CreateReceiptPageComponent implements OnInit {
+  selectedFile: File;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  message: string;
+  imageName: any;
 
   public receiptForm: FormGroup;
 
@@ -19,7 +26,8 @@ export class CreateReceiptPageComponent implements OnInit {
   public availableCategories$: Observable<Category[]>;
 
   constructor(private formBuilder: FormBuilder,
-              private receiptService: ReceiptService) {
+              private receiptService: ReceiptService,
+              private http: HttpClient) {
   }
 
   get ingredientsForm(): FormArray {
@@ -117,11 +125,35 @@ export class CreateReceiptPageComponent implements OnInit {
 
       // console.log(modified);
 
-      this.receiptService.addRecipe(modified as any);
+      this.receiptService.addRecipe(modified as any).subscribe();
     }
+  }
+
+  public onFileChanged(event) {
+    // Select File
+    this.selectedFile = event.target.files[0];
   }
 
   selectedIngredient($event: Event) {
     console.log($event);
   }
+
+  onUpload() {
+    this.receiptService.onUpload(this.selectedFile);
+  }
+
+  // Gets called when the user clicks on retieve image button to get the image from back end
+  getImage() {
+    // Make a call to Sprinf Boot to get the Image Bytes.
+    this.imageName = 'name1';
+    this.http.get(' http://localhost:8083/image/get/' + this.imageName)
+      .subscribe(
+    res => {
+      this.retrieveResonse = res;
+      this.base64Data = this.retrieveResonse.picByte;
+      this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+    }
+  );
+  }
+
 }

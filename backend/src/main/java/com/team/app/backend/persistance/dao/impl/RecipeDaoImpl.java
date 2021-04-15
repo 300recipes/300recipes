@@ -3,6 +3,7 @@ package com.team.app.backend.persistance.dao.impl;
 import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.dao.RecipeDao;
 import com.team.app.backend.persistance.dao.mappers.RecipeRowMapper;
+import com.team.app.backend.persistance.model.Image;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class RecipeDaoImpl implements RecipeDao {
     @Autowired
     private RecipeRowMapper recipeRowMapper;
 
+
+    @Autowired
+    private com.team.app.backend.persistance.dao.mappers.ImageRowMapper imageRowMapper;
 
     public RecipeDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -142,4 +146,22 @@ public class RecipeDaoImpl implements RecipeDao {
                 id
         );
     }
+
+    @Override
+    public void saveImage(Image img) {
+        jdbcTemplate.update(
+                "INSERT INTO test_image ( name, image) VALUES (?, ?);",
+                img.getName(),
+                img.getPicByte()
+        );
+    }
+
+    @Override
+    public Image getImage(String name) {
+        return jdbcTemplate.queryForObject("Select name, image from test_image where name = ?",
+                new Object[]{name},
+                imageRowMapper);
+    }
+
+
 }
