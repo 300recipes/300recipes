@@ -10,12 +10,14 @@ import com.team.app.backend.persistance.model.RecipeWithContent;
 import com.team.app.backend.persistance.model.Role;
 import com.team.app.backend.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(path = "api")
@@ -69,6 +71,19 @@ public class RecipesController {
     @GetMapping("/recipes/notapproved")
     public List<Recipe> getNotApproved(){
         return recipeService.getNotApprovedRecipes();
+    }
+
+    @PostMapping(value = "/recipe/like/{id}")
+    public void likeRecipe(@RequestHeader HttpHeaders headers, @PathVariable("id") long id){
+        System.out.println("Like : " + headers.getFirst(HttpHeaders.AUTHORIZATION) );
+        long user_id = Long.parseLong(jwtUtil.getUserId(Objects.requireNonNull(headers.getFirst(HttpHeaders.AUTHORIZATION)).split(" ")[1]));
+        recipeService.likeRecipe(id,user_id,true);
+    }
+
+    @PostMapping("/recipe/dislike/{id}")
+    public void dislikeRecipe(@RequestHeader HttpHeaders headers, @PathVariable("id") long id){
+        long user_id = Long.parseLong(jwtUtil.getUserId(Objects.requireNonNull(headers.getFirst(HttpHeaders.AUTHORIZATION)).split(" ")[1]));
+        recipeService.likeRecipe(id,user_id,false);
     }
 
 }

@@ -28,5 +28,6 @@ public interface RecipeDao {
 
     void approve(Long id);
 
+    void likeRecipe(Long rec_id, Long user_id, boolean is_liked);
 
 }

@@ -142,4 +142,21 @@ public class RecipeDaoImpl implements RecipeDao {
                 id
         );
     }
+
+
+    @Override
+    public void likeRecipe(Long rec_id, Long user_id, boolean is_liked) {
+
+        String sql="INSERT INTO user_to_rec( rec_id, user_id, is_liked) VALUES (?, ?, ?) ON CONFLICT (rec_id, user_id) DO UPDATE SET is_liked = excluded.is_liked;";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setLong(1, rec_id);
+                    ps.setLong(2, user_id);
+                    ps.setBoolean(3, is_liked);
+                    return ps;
+                },
+                keyHolder);
+    }
 }
