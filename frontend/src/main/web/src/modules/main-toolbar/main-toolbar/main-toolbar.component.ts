@@ -33,17 +33,28 @@ export class MainToolbarComponent {
     this.authenticationService.signout();
   }
 
-  add() {
+  isAdmin(){
+    const user = this.authenticationService.currentUserValue;
+    if(user){
+      let role = user.sub.substring(user.sub.lastIndexOf(',') + 1);
+      return role === 'R_ADMIN'; 
+    }
 
+    return false;
   }
+
+  isUser(){
+    const user = this.authenticationService.currentUserValue;
+    if(user){
+      let role = user.sub.substring(user.sub.lastIndexOf(',') + 1);
+      return role === 'R_USER'; 
+    }
+
+    return false;
+  }
+
 
   show() {
     return this.authenticationService.currentUserValue;
   }
-
-  search() {
-
-    // this.router.navigate(['/receipts'], { queryParams: { search: this.term }, queryParamsHandling: 'merge' });
-  }
-
 }
