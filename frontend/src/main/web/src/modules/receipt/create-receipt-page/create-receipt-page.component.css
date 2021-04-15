@@ -1,17 +1,14 @@
 .create-recipe {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   background-color: white;
-  margin: 0 30px;
-  height: 100%;
+  margin: 0 20%;
   padding: 10px;
   box-sizing: border-box;
 }
 
 
-.create-recipe > .title {
+.main-title {
   font-size: 30px;
   font-weight: bolder;
 }
@@ -65,6 +62,11 @@
   color: white;
 }
 
+.remove:hover {
+  background-color: #fb4c1f;
+  color: white;
+}
+
 
 .ingredient-row {
   display: flex;
@@ -93,9 +95,7 @@
   align-items: center;
 }
 
-.step-header > * {
-  margin-right: 7px;
-}
+
 
 .step-header > span {
   font-size: 14px;
@@ -112,7 +112,3 @@ input[type=text] {
   border-radius: 4px;
 }
 
-textarea {
-  width: 420px;
-  height: 100px;
-}

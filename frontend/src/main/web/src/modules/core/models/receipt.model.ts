@@ -5,6 +5,7 @@ export interface Receipt {
   description: string;
   author?: string;
   imageUrl?: string;
+  imageFile?: string;
   hashes?: string[];
   ingredients?: Ingredient[];
   steps?: ReceiptStep[];

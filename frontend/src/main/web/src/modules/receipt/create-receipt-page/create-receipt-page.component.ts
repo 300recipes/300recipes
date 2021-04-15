@@ -116,6 +116,7 @@ export class CreateReceiptPageComponent implements OnInit {
       const modified = {
         title: receipt.title,
         imageUrl: receipt.imageUrl,
+        file: this.selectedFile,
         description: receipt.description,
         categories: receipt.categories.map((val: {category: Category}) => val.category.id) as any,
         steps: receipt.steps,
@@ -142,18 +143,18 @@ export class CreateReceiptPageComponent implements OnInit {
     this.receiptService.onUpload(this.selectedFile);
   }
 
-  // Gets called when the user clicks on retieve image button to get the image from back end
-  getImage() {
-    // Make a call to Sprinf Boot to get the Image Bytes.
-    this.imageName = 'name1';
-    this.http.get(' http://localhost:8083/image/get/' + this.imageName)
-      .subscribe(
-    res => {
-      this.retrieveResonse = res;
-      this.base64Data = this.retrieveResonse.picByte;
-      this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-    }
-  );
-  }
+  // // Gets called when the user clicks on retieve image button to get the image from back end
+  //   getImage() {
+  //     // Make a call to Sprinf Boot to get the Image Bytes.
+  //     this.imageName = 'name1';
+  //     this.http.get(' http://localhost:8083/image/get/' + this.imageName)
+  //       .subscribe(
+  //     res => {
+  //       this.retrieveResonse = res;
+  //       this.base64Data = this.retrieveResonse.picByte;
+  //       this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+  //     }
+  //   );
+  // }
 
 }

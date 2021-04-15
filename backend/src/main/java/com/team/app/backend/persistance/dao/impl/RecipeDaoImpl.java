@@ -38,7 +38,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public long add(Recipe recipe, Long user_id) {
-        String sql="INSERT INTO recipes( title, description, image, author_id, approved) VALUES (?, ?, ?, ?, ?);";
+        String sql="INSERT INTO recipes( title, description, image, author_id, approved, image_file) VALUES (?, ?, ?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
                 connection -> {
@@ -48,6 +48,7 @@ public class RecipeDaoImpl implements RecipeDao {
                     ps.setString(3, recipe.getImageUrl());
                     ps.setLong(4, user_id);
                     ps.setBoolean(5, false);
+                    ps.setBytes(5, recipe.getImageFile());
                     return ps;
                 },
                 keyHolder);
@@ -69,26 +70,26 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public Recipe get(Long id) {
-        return jdbcTemplate.queryForObject("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.id = ?",
+        return jdbcTemplate.queryForObject("SELECT r.id,r.title,r.description,r.image, r.image_file ,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.id = ?",
                 new Object[]{id},
                 recipeRowMapper);
     }
 
     @Override
     public List<Recipe> getAll() {
-        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id",
+        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image, r.image_file ,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id",
                 recipeRowMapper);
     }
 
     @Override
     public List<Recipe> getNotApproved() {
-        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.approved = false",
+        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image, r.image_file ,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.approved = false",
                 recipeRowMapper);
     }
 
     @Override
     public List<Recipe> getRecipesByCategory(String category) {
-        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id INNER JOIN rec_to_categ rtc ON r.id = rtc.rec_id INNER JOIN recipe_categories cat ON cat.id = rtc.cat_id where cat.name = ?",
+        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image, r.image_file ,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id INNER JOIN rec_to_categ rtc ON r.id = rtc.rec_id INNER JOIN recipe_categories cat ON cat.id = rtc.cat_id where cat.name = ?",
                 new Object[] { category },
                 recipeRowMapper);    }
 
@@ -97,7 +98,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
         searchStr="%"+searchStr+"%";
 
-        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE LOWER(r.title) like ? or r.description like ?;",
+        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image, r.image_file , u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE LOWER(r.title) like ? or r.description like ?;",
                 new Object[] { searchStr,searchStr },
                 recipeRowMapper);
     }
@@ -164,4 +165,20 @@ public class RecipeDaoImpl implements RecipeDao {
     }
 
 
+
+    @Override
+    public void likeRecipe(Long rec_id, Long user_id, boolean is_liked) {
+
+        String sql="INSERT INTO user_to_rec( rec_id, user_id, is_liked) VALUES (?, ?, ?) ON CONFLICT (rec_id, user_id) DO UPDATE SET is_liked = excluded.is_liked;";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setLong(1, rec_id);
+                    ps.setLong(2, user_id);
+                    ps.setBoolean(3, is_liked);
+                    return ps;
+                },
+                keyHolder);
+    }
 }

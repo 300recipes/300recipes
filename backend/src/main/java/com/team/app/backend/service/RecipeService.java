@@ -5,15 +5,18 @@ import com.team.app.backend.dto.RecipeFilterDto;
 import com.team.app.backend.persistance.model.Recipe;
 import com.team.app.backend.persistance.model.RecipeWithContent;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface RecipeService {
 
     void deleteRecipe(Long id);
 
-    void addRecipe(RecipeCreateDto recipeCreateDto ,long user_id);
+    void addRecipe(RecipeCreateDto recipeCreateDto ,long user_id) throws IOException;
 
     void approveRecipe(Long id);
+
+    void likeRecipe(Long rec_id, Long user_id, boolean is_liked);
 
     RecipeWithContent getRecipeById(Long id);
 

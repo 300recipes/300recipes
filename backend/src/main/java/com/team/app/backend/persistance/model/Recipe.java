@@ -7,19 +7,22 @@ public class Recipe {
     String description;
     String imageUrl;
     String author;
+    byte[] imageFile;
 
     public Recipe(Recipe recipe){
         this.id = recipe.getId();
         this.title = recipe.getTitle();
         this.description = recipe.getDescription();
         this.imageUrl = recipe.getImageUrl();
+        this.imageFile = recipe.getImageFile();
         this.author= recipe.getAuthor();
     }
-    public Recipe(long id, String title, String description,  String imageUrl, String author) {
+    public Recipe(long id, String title, String description,  String imageUrl, byte[] imageFile, String author) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.imageFile = imageFile;
         this.author=author;
     }
 
@@ -67,4 +70,11 @@ public class Recipe {
         this.author = author;
     }
 
+    public byte[] getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(byte[] imageFile) {
+        this.imageFile = imageFile;
+    }
 }

@@ -31,5 +31,7 @@ public interface RecipeDao {
 
     void saveImage(Image img);
 
+    void likeRecipe(Long rec_id, Long user_id, boolean is_liked);
+
     Image getImage(String name);
 }

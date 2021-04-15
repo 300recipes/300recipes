@@ -18,6 +18,7 @@ public class RecipeRowMapper implements RowMapper<Recipe> {
                 resultSet.getString("title"),
                 resultSet.getString("description"),
                 resultSet.getString("image"),
+                resultSet.getBytes("image_file"),
                 resultSet.getString("author")
         );
     }

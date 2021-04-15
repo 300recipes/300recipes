@@ -13,6 +13,7 @@ import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/
 export class ReceiptService {
 
   private url = 'https://recipes300.herokuapp.com/';
+  private localUrl = 'http://localhost:8083/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -34,7 +35,7 @@ export class ReceiptService {
 
   // TODO: from, quantity
   public getReceiptList(): Observable<Receipt[]> {
-    return this.http.get<Receipt[]>(this.url + 'api/recipes');
+    return this.http.get<Receipt[]>(this.localUrl + 'api/recipes');
   }
 
   public getStubReceipts(): Observable<Receipt[]> {
@@ -46,16 +47,6 @@ export class ReceiptService {
   }
 
   public getCategoriesList(): Observable<Category[]> {
-    // return of([
-    //   {
-    //     id: '1',
-    //     name: 'Category 1'
-    //   },
-    //   {
-    //     id: '2',
-    //     name: 'Category 2'
-    //   },
-    // ]);
     return this.http.get<Category[]>(this.url + 'api/categories');
   }
 
@@ -68,25 +59,16 @@ export class ReceiptService {
   }
 
   public searchRecipes(value: string): Observable<Receipt[]> {
-    return this.http.get<Receipt[]>(this.url + 'api/recipes/search/' + value);
+    return this.http.get<Receipt[]>(this.localUrl + 'api/recipes/search/' + value);
   }
 
   public addRecipe(receipt: unknown): any {
     // this.http.post(this.url + 'api/recipes/add', receipt);
 
-    let rec = {categories: [2],
-      description: 'asdasd',
-      imageUrl: 'aasda',
-      ingredients:
-        [{amount: 1, measure: 'asda', id: 14}],
-      steps: [{title: 'a', description: 'asd', imageUrl: 'asd'}],
-      title: 'йцуйцуйцу'
 
-    };
-    console.log(rec);
     console.log(JSON.stringify(receipt));
 
-    return this.http.post(this.url + 'api/recipes/add', JSON.stringify(receipt), this.httpOptions).pipe(
+    return this.http.post(this.localUrl + 'api/recipes/add', JSON.stringify(receipt), this.httpOptions).pipe(
       map(data => {
         console.log(JSON.stringify(data));
         alert(JSON.stringify(data));
@@ -108,11 +90,13 @@ export class ReceiptService {
 
   public setLike(receipt: Receipt) {
     window.alert("LIKE " + receipt.title)
+
+    this.http.post(this.localUrl + 'api/recipe/like/'+ receipt.id, this.httpOptions).subscribe();
   }
 
   public setDislike(receipt: Receipt) {
     window.alert("DISLIKE " + receipt.title)
-
+    this.http.post(this.localUrl + 'api/recipe/dislike/'+ receipt.id, this.httpOptions).subscribe();
   }
 
   // Gets called when the user clicks on submit to upload the image

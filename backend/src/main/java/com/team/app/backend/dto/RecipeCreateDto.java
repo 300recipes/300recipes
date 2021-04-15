@@ -1,11 +1,14 @@
 package com.team.app.backend.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public class RecipeCreateDto {
     String title;
     String description;
     String imageUrl;
+    MultipartFile file;
     List<IngredientDto> ingredients;
     List<RecipeStepDto> steps;
     List<Integer> categories;
@@ -56,5 +59,13 @@ public class RecipeCreateDto {
 
     public void setSteps(List<RecipeStepDto> steps) {
         this.steps = steps;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }
