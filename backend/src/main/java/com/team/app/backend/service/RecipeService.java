@@ -15,6 +15,8 @@ public interface RecipeService {
 
     void approveRecipe(Long id);
 
+    void likeRecipe(Long rec_id, Long user_id, boolean is_liked);
+
     RecipeWithContent getRecipeById(Long id);
 
     List<Recipe> getRecipesByCategory(String category);

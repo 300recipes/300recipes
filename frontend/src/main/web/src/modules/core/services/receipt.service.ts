@@ -12,6 +12,7 @@ import { map } from "rxjs/operators";
 export class ReceiptService {
 
   private url = 'https://recipes300.herokuapp.com/';
+  private localUrl = 'http://localhost:8083/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -103,11 +104,13 @@ export class ReceiptService {
 
   public setLike(receipt: Receipt) {
     window.alert("LIKE " + receipt.title)
+
+    this.http.post(this.localUrl + 'api/recipe/like/'+ receipt.id, this.httpOptions).subscribe();
   }
 
   public setDislike(receipt: Receipt) {
     window.alert("DISLIKE " + receipt.title)
-
+    this.http.post(this.localUrl + 'api/recipe/dislike/'+ receipt.id, this.httpOptions).subscribe();
   }
 
 
