@@ -11,7 +11,10 @@
       <span>Description</span>
       <textarea formControlName="description"></textarea>
     </div>
-
+    <div class="form-field">
+      <span>Image url</span>
+      <textarea formControlName="imageUrl"></textarea>
+    </div>
     <div class="ingredients" formArrayName="categories">
       <div class="header">
         <span>Categories</span>
@@ -47,6 +50,7 @@
             </option>
           </select>
           <input type="number" formControlName="amount">
+          <input type="text" formControlName="measure">
         </div>
       </div>
     </div>

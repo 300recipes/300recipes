@@ -26,11 +26,11 @@ export class MainPageComponent implements OnInit {
   }
 
   public search(s: SearchReceipt): void {
-    console.log(s);
-    console.log(' -- search');
+    // console.log(s);
+    // console.log(' -- search');
     this.receiptService.searchReceipts(s).subscribe(data => {
-      console.log(data);
-      console.log('hmm');
+      // console.log(data);
+      // console.log('hmm');
       this.receipts = data;
     });
   }

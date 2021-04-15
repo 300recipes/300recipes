@@ -30,10 +30,10 @@ public class RecipesController {
     public List<Recipe> findAllRecipes(){ return recipeService.getAllRecipes(); }
 
     @PostMapping("/recipes/add")
-    public ResponseEntity addRecipe(@RequestBody @Valid RecipeCreateDto recipeCreateDto){
+    public ResponseEntity addRecipe(@RequestBody RecipeCreateDto recipeCreateDto){
         System.out.println("add " + recipeCreateDto.getTitle());
-        System.out.println(jwtUtil.getUserId("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4LGFzZGY1LFJfQURNSU4iLCJpc3MiOiJleGFtcGxlLmlvIiwiaWF0IjoxNjE3MzEwNDM4LCJleHAiOjE2MTgxNzQ0Mzh9.rTbmmxeuv-51Ijfzi0S7SdoqWo0PwoCXtbI73qwhfiNcfWCfuFpDjd63S09kH6" +
-                "vesryj0tCVPzZuUgtKLKUOcw"));
+//        System.out.println(jwtUtil.getUserId("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4LGFzZGY1LFJfQURNSU4iLCJpc3MiOiJleGFtcGxlLmlvIiwiaWF0IjoxNjE3MzEwNDM4LCJleHAiOjE2MTgxNzQ0Mzh9.rTbmmxeuv-51Ijfzi0S7SdoqWo0PwoCXtbI73qwhfiNcfWCfuFpDjd63S09kH6" +
+//                "vesryj0tCVPzZuUgtKLKUOcw"));
         recipeService.addRecipe(recipeCreateDto,11L);
         return ResponseEntity.ok().body("Recipe was successfully added");
     }

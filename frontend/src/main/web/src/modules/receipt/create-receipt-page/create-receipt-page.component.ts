@@ -48,6 +48,7 @@ export class CreateReceiptPageComponent implements OnInit {
     this.receiptForm = this.formBuilder.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
+      imageUrl: new FormControl('', Validators.required),
       ingredients: this.formBuilder.array([]),
       steps: this.formBuilder.array([]),
       categories: this.formBuilder.array([]),
@@ -91,6 +92,7 @@ export class CreateReceiptPageComponent implements OnInit {
     this.ingredientsForm.push(
       this.formBuilder.group({
         amount: new FormControl(1, Validators.required),
+        measure: new FormControl('', Validators.required),
         ingredient: new FormControl(null, Validators.required),
       }));
     this.receiptForm.updateValueAndValidity();
@@ -100,19 +102,20 @@ export class CreateReceiptPageComponent implements OnInit {
   public onSubmit() {
     if (this.receiptForm.valid) {
       const receipt = this.receiptForm.value;
-      console.log(receipt);
+      // console.log(receipt);
 
 
       const modified = {
         title: receipt.title,
+        imageUrl: receipt.imageUrl,
         description: receipt.description,
         categories: receipt.categories.map((val: {category: Category}) => val.category.id) as any,
         steps: receipt.steps,
-        ingredients: receipt.ingredients.map((val: {amount: number, ingredient: Ingredient}) =>
-          ({amount: val.amount, id: val.ingredient.id})),
+        ingredients: receipt.ingredients.map((val: {amount: number, measure: string , ingredient: Ingredient}) =>
+          ({amount: val.amount, measure: val.measure , id: val.ingredient.id})),
       };
 
-      console.log(modified);
+      // console.log(modified);
 
       this.receiptService.addRecipe(modified as any);
     }
