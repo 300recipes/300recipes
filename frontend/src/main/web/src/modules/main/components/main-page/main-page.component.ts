@@ -73,6 +73,7 @@ export class MainPageComponent implements OnInit {
       // console.log(data);
       // console.log('hmm');
       this.receipts = data;
+      this.sortedReceipts = this.receipts;
     });
   }
 }
