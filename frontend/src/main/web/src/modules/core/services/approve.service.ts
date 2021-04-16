@@ -29,7 +29,7 @@ export class ApproveService {
 
   public approveRecipe(id: String): any {
     // TODO change it
-    return this.http.post(this.url + 'recipes/approve/' + id, this.httpOptions).pipe(
+    return this.http.post(this.url + 'recipe/approve/' + id, this.httpOptions).pipe(
       map(data => console.log(JSON.stringify(data)))
     );
   }

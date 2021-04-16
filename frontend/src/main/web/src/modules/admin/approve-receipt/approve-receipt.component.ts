@@ -22,8 +22,8 @@ export class ApproveReceiptComponent implements OnInit {
   }
 
   approve(): void {
-    console.log(this.receiptId)
-    // this.approveService.approveRecipe(this.receiptId)
+    console.log(this.receiptId);
+    this.approveService.approveRecipe(this.receiptId).subscribe();
   }
 
 }
