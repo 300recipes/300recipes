@@ -72,7 +72,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public List<Recipe> getAll() {
-        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id",
+        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.approved = true",
                 recipeRowMapper);
     }
 
@@ -84,7 +84,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public List<Recipe> getRecipesByCategory(String category) {
-        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id INNER JOIN rec_to_categ rtc ON r.id = rtc.rec_id INNER JOIN recipe_categories cat ON cat.id = rtc.cat_id where cat.name = ?",
+        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id INNER JOIN rec_to_categ rtc ON r.id = rtc.rec_id INNER JOIN recipe_categories cat ON cat.id = rtc.cat_id where cat.name = ? and r.approved = true",
                 new Object[] { category },
                 recipeRowMapper);    }
 
@@ -93,7 +93,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
         searchStr="%"+searchStr+"%";
 
-        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE LOWER(r.title) like ? or r.description like ?;",
+        return jdbcTemplate.query("SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE LOWER(r.title) like ? or r.description like ? and r.approved = true;",
                 new Object[] { searchStr,searchStr },
                 recipeRowMapper);
     }
@@ -105,7 +105,7 @@ public class RecipeDaoImpl implements RecipeDao {
                 "FROM recipes r INNER JOIN users u ON r.author_id = u.id \n" +
                 "INNER JOIN ingred_to_rec itc ON itc.rec_id = r.id\n" +
                 "INNER JOIN rec_to_categ rtc ON rtc.rec_id = r.id\n" +
-                "WHERE (LOWER(r.title) like :query or LOWER(r.description) like :query) \n";
+                "WHERE r.approved = true and (LOWER(r.title) like :query or LOWER(r.description) like :query) \n";
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         if (recipeFilterDto.getQuery() != null) {
             parameters.addValue("query", "%" + recipeFilterDto.getQuery() + "%");
