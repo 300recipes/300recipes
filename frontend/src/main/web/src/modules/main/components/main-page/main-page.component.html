@@ -1,8 +1,25 @@
 <div class="landing-page">
 
   <div class="content">
+
     <div class="receipts-list">
-      <app-receipt-list-item *ngFor="let receipt of receipts"
+      <div class="sort-block">
+        <app-dropdown
+          (selectedItem)="selectSort($event)"
+          [width]="180"
+          [items]="sortOptions"
+          [label]="dropdownLabel">
+        </app-dropdown>
+
+        <span class="asc-text">ascending:</span>
+        <input
+          (change)="changeDirection()"
+          [checked]="ascending"
+          type="checkbox"/>
+
+      </div>
+
+      <app-receipt-list-item *ngFor="let receipt of sortedReceipts"
                              [receipt]="receipt">
       </app-receipt-list-item>
     </div>

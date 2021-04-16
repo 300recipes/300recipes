@@ -23,3 +23,23 @@
   background-color: white;
 }
 
+.sort-block {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: flex-start;
+  width: 100%;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.asc-text {
+  margin: 0 15px;
+}
+
+.reset-sort {
+  margin-left: 15px;
+  cursor: pointer;
+}
