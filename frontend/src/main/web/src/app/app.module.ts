@@ -9,6 +9,8 @@ import { MainModule } from "../modules/main/main.module";
 import { ReceiptModule } from "../modules/receipt/receipt.module";
 import { CommonModule } from "@angular/common";
 import { AdminModule } from 'src/modules/admin/admin.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'src/modules/core/utils/jwt.interceptor';
 
 
 
@@ -26,7 +28,7 @@ import { AdminModule } from 'src/modules/admin/admin.module';
     ReceiptModule,
     AdminModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
