@@ -72,13 +72,17 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public List<Recipe> getAll() {
-        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.approved = true",
+        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author , COALESCE(likes_count,0) - COALESCE(dislikes_count,0) as rating\n" +
+                        "FROM recipes r INNER JOIN users u ON r.author_id = u.id\n" +
+                        "full outer join (SELECT REC_ID, COUNT(is_liked) as likes_count FROM user_to_rec WHERE is_liked = true GROUP BY REC_ID, is_Liked) as likes on likes.rec_id = r.id\n" +
+                        "full outer join (SELECT REC_ID, COUNT(is_liked) as dislikes_count FROM user_to_rec WHERE is_liked = false GROUP BY REC_ID, is_Liked) as dislike on r.id = dislike.rec_id " +
+                        "WHERE r.approved = true",
                 recipeRowMapper);
     }
 
     @Override
     public List<Recipe> getNotApproved() {
-        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.approved = false",
+        return jdbcTemplate.query("SELECT r.id,r.title,r.description,r.image,u.username author ,0 as rating FROM recipes r INNER JOIN users u ON r.author_id = u.id WHERE r.approved = false",
                 recipeRowMapper);
     }
 
@@ -101,8 +105,10 @@ public class RecipeDaoImpl implements RecipeDao {
     @Override
     public List<Recipe> findFilteredRecipe(RecipeFilterDto recipeFilterDto) {
         System.out.println();
-        String sql = "SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author \n" +
+        String sql = "SELECT DISTINCT(r.id),r.title,r.description,r.image,u.username author, COALESCE(likes_count,0) - COALESCE(dislikes_count,0) as rating \n" +
                 "FROM recipes r INNER JOIN users u ON r.author_id = u.id \n" +
+                "full outer join (SELECT REC_ID, COUNT(is_liked) as likes_count FROM user_to_rec WHERE is_liked = true GROUP BY REC_ID, is_Liked) as likes on likes.rec_id = r.id\n" +
+                "full outer join (SELECT REC_ID, COUNT(is_liked) as dislikes_count FROM user_to_rec WHERE is_liked = false GROUP BY REC_ID, is_Liked) as dislike on r.id = dislike.rec_id " +
                 "INNER JOIN ingred_to_rec itc ON itc.rec_id = r.id\n" +
                 "INNER JOIN rec_to_categ rtc ON rtc.rec_id = r.id\n" +
                 "WHERE r.approved = true and (LOWER(r.title) like :query or LOWER(r.description) like :query) \n";

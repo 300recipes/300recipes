@@ -8,19 +8,24 @@ public class Recipe {
     String imageUrl;
     String author;
 
+
+    int rating;
+
     public Recipe(Recipe recipe){
         this.id = recipe.getId();
         this.title = recipe.getTitle();
         this.description = recipe.getDescription();
         this.imageUrl = recipe.getImageUrl();
         this.author= recipe.getAuthor();
+        this.rating = recipe.getRating();
     }
-    public Recipe(long id, String title, String description,  String imageUrl, String author) {
+    public Recipe(long id, String title, String description,  String imageUrl, String author, int rating) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.author=author;
+        this.rating = rating;
     }
 
     public Recipe() {
@@ -67,4 +72,11 @@ public class Recipe {
         this.author = author;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 }
