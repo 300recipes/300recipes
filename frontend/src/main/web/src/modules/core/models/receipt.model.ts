@@ -8,6 +8,7 @@ export interface Receipt {
   hashes?: string[];
   ingredients?: Ingredient[];
   steps?: ReceiptStep[];
+  rating: number;
 }
 
 export interface ReceiptStep {
