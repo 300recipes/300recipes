@@ -42,16 +42,6 @@ export class ReceiptService {
   }
 
   public getCategoriesList(): Observable<Category[]> {
-    // return of([
-    //   {
-    //     id: '1',
-    //     name: 'Category 1'
-    //   },
-    //   {
-    //     id: '2',
-    //     name: 'Category 2'
-    //   },
-    // ]);
     return this.http.get<Category[]>(this.url + 'api/categories');
   }
 
@@ -68,19 +58,6 @@ export class ReceiptService {
   }
 
   public addRecipe(receipt: unknown): any {
-    // this.http.post(this.url + 'api/recipes/add', receipt);
-
-    let rec = {
-      categories: [2],
-      description: 'asdasd',
-      imageUrl: 'aasda',
-      ingredients:
-        [{ amount: 1, measure: 'asda', id: 14 }],
-      steps: [{ title: 'a', description: 'asd', imageUrl: 'asd' }],
-      title: 'йцуйцуйцу'
-
-    };
-    console.log(rec);
     console.log(JSON.stringify(receipt));
 
     return this.http.post(this.url + 'api/recipes/add', JSON.stringify(receipt), this.httpOptions).pipe(
@@ -93,8 +70,6 @@ export class ReceiptService {
   }
 
   public searchReceipts(search: SearchReceipt): any {
-    // console.log('search' + search);
-    // TODO: replace url for searching recipies
     return this.http.post(this.url + 'api/recipes/filter', JSON.stringify(search), this.httpOptions).pipe(
       map(data => {
         console.log(JSON.stringify(data));
