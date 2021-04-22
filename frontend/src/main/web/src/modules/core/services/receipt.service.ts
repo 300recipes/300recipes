@@ -12,7 +12,7 @@ import { map } from "rxjs/operators";
 export class ReceiptService {
 
   private url = 'https://recipes300.herokuapp.com/';
-  private localUrl = 'http://localhost:8083/';
+  //private localUrl = 'http://localhost:8083/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -70,12 +70,13 @@ export class ReceiptService {
   public addRecipe(receipt: unknown): any {
     // this.http.post(this.url + 'api/recipes/add', receipt);
 
-    let rec = {categories: [2],
+    let rec = {
+      categories: [2],
       description: 'asdasd',
       imageUrl: 'aasda',
       ingredients:
-        [{amount: 1, measure: 'asda', id: 14}],
-      steps: [{title: 'a', description: 'asd', imageUrl: 'asd'}],
+        [{ amount: 1, measure: 'asda', id: 14 }],
+      steps: [{ title: 'a', description: 'asd', imageUrl: 'asd' }],
       title: 'йцуйцуйцу'
 
     };
@@ -103,14 +104,11 @@ export class ReceiptService {
   }
 
   public setLike(receipt: Receipt) {
-    window.alert("LIKE " + receipt.title)
-
-    this.http.post(this.localUrl + 'api/recipe/like/'+ receipt.id, this.httpOptions).subscribe();
+    this.http.post(this.url + 'api/recipe/like/' + receipt.id, this.httpOptions).subscribe();
   }
 
   public setDislike(receipt: Receipt) {
-    window.alert("DISLIKE " + receipt.title)
-    this.http.post(this.localUrl + 'api/recipe/dislike/'+ receipt.id, this.httpOptions).subscribe();
+    this.http.post(this.url + 'api/recipe/dislike/' + receipt.id, this.httpOptions).subscribe();
   }
 
 

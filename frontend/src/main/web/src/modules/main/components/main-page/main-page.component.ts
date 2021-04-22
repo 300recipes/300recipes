@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ReceiptService} from '../../../core/services/receipt.service';
-import {Receipt, SearchReceipt} from '../../../core/models/receipt.model';
-import {DropdownItem} from '../dropdown/dropdown.component';
+import { Component, OnInit } from '@angular/core';
+import { ReceiptService } from '../../../core/services/receipt.service';
+import { Receipt, SearchReceipt } from '../../../core/models/receipt.model';
+import { DropdownItem } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-landing-page',

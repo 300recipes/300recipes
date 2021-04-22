@@ -18,14 +18,16 @@
     </div>
   </div>
 
-  <div class="actions">
-    <div class="save">
-    </div>
+  <div *ngIf="isUser()" class="actions">
+
     <div (click)="like()" class="up align-middle">
-      <span class="align-middle">👍🏻</span>
+      <span class="align-middle">👍🏿</span>
+    </div>
+    <div class="up align-middle">
+      <span class="badge bg-warning">{{receipt.rating || '0'}}</span>
     </div>
     <div (click)="dislike()" class="down align-middle">
-      <span class="align-middle">👎🏻</span>
+      <span class="align-middle">👎🏿</span>
     </div>
   </div>
 </div>
