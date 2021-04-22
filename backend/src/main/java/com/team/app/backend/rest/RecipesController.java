@@ -32,11 +32,10 @@ public class RecipesController {
     public List<Recipe> findAllRecipes(){ return recipeService.getAllRecipes(); }
 
     @PostMapping("/recipes/add")
-    public ResponseEntity addRecipe(@RequestBody RecipeCreateDto recipeCreateDto){
+    public ResponseEntity addRecipe(@RequestHeader HttpHeaders headers, @RequestBody RecipeCreateDto recipeCreateDto){
         System.out.println("add " + recipeCreateDto.getTitle());
-//        System.out.println(jwtUtil.getUserId("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4LGFzZGY1LFJfQURNSU4iLCJpc3MiOiJleGFtcGxlLmlvIiwiaWF0IjoxNjE3MzEwNDM4LCJleHAiOjE2MTgxNzQ0Mzh9.rTbmmxeuv-51Ijfzi0S7SdoqWo0PwoCXtbI73qwhfiNcfWCfuFpDjd63S09kH6" +
-//                "vesryj0tCVPzZuUgtKLKUOcw"));
-        recipeService.addRecipe(recipeCreateDto,11L);
+        String userId = jwtUtil.getUserId(headers.getFirst(HttpHeaders.AUTHORIZATION).split(" ")[1]);
+        recipeService.addRecipe(recipeCreateDto,Long.parseLong(userId));
         return ResponseEntity.ok().body("Recipe was successfully added");
     }
 
@@ -76,13 +75,14 @@ public class RecipesController {
     @PostMapping(value = "/recipe/like/{id}")
     public void likeRecipe(@RequestHeader HttpHeaders headers, @PathVariable("id") long id){
         System.out.println("Like : " + headers.getFirst(HttpHeaders.AUTHORIZATION) );
-        long user_id = Long.parseLong(jwtUtil.getUserId(Objects.requireNonNull(headers.getFirst(HttpHeaders.AUTHORIZATION)).split(" ")[1]));
+        long user_id = Long.parseLong(jwtUtil.getUserId(headers.getFirst(HttpHeaders.AUTHORIZATION).split(" ")[1]));
         recipeService.likeRecipe(id,user_id,true);
     }
 
     @PostMapping("/recipe/dislike/{id}")
     public void dislikeRecipe(@RequestHeader HttpHeaders headers, @PathVariable("id") long id){
-        long user_id = Long.parseLong(jwtUtil.getUserId(Objects.requireNonNull(headers.getFirst(HttpHeaders.AUTHORIZATION)).split(" ")[1]));
+        System.out.println("Dislike : " + headers.getFirst(HttpHeaders.AUTHORIZATION) );
+        long user_id = Long.parseLong(jwtUtil.getUserId(headers.getFirst(HttpHeaders.AUTHORIZATION).split(" ")[1]));
         recipeService.likeRecipe(id,user_id,false);
     }
 
