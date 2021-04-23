@@ -66,7 +66,7 @@ export class MainPageComponent implements OnInit {
     } else if (sort.id === 'rating') {
       this.sortedReceipts = this.receipts;
       this.sortedReceipts = this.sortedReceipts.sort(
-        (a, b) => a.rating - b.rating);
+        (a, b) => b.rating - a.rating);
     }
     if (!this.ascending) {
       this.sortedReceipts.reverse();
