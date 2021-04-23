@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/modules/core/services/authentication.service';
+import { ToastsService } from 'src/modules/core/services/toasts.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,22 +17,23 @@ export class SignInComponent implements OnInit {
 
 
   constructor(public activeModal: NgbActiveModal,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private toastService: ToastsService) { }
 
   ngOnInit(): void {
   }
 
-  logIn(){
-    this.authenticationService.signinUser(this.username,this.password)
-    .subscribe(
+  logIn() {
+    this.authenticationService.signinUser(this.username, this.password)
+      .subscribe(
         () => {
-            alert("Signed in")
+          this.toastService.showSuccess("Signed in")
         },
         error => {
-            alert("Signing in failed " + error)
-            console.log(error)
+          this.toastService.showDanger("Signing in failed ")
+          console.log(error)
         }
-    );
+      );
     this.activeModal.close('Close click');
   }
 
