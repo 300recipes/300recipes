@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ReceiptService} from "../../core/services/receipt.service";
-import {Observable} from "rxjs";
-import {Category, Ingredient, Receipt} from "../../core/models/receipt.model";
+import {ReceiptService} from '../../core/services/receipt.service';
+import {Observable} from 'rxjs';
+import {Category, Ingredient, Receipt} from '../../core/models/receipt.model';
 
 @Component({
   selector: 'app-create-receipt-page',
@@ -115,13 +115,46 @@ export class CreateReceiptPageComponent implements OnInit {
           ({amount: val.amount, measure: val.measure , id: val.ingredient.id})),
       };
 
-      // console.log(modified);
+      console.log(modified);
 
-      this.receiptService.addRecipe(modified as any).subscribe();
+      // this.receiptService.addRecipe(modified as any).subscribe();
     }
   }
 
   selectedIngredient($event: Event) {
     console.log($event);
+  }
+
+  selectReceiptImage(event: Event): void {
+    if (event && event.target) {
+      const target = event.target as HTMLInputElement;
+      if (target.files && target.files[0]) {
+        const reader = new FileReader();
+        reader.readAsDataURL(target.files[0]); // read file as data url
+        reader.onload = (eventt) => { // called once readAsDataURL is completed
+
+          this.receiptForm.controls.imageUrl.setValue((eventt.target as any).result);
+          this.receiptForm.updateValueAndValidity();
+        };
+      }
+    }
+  }
+
+  selectImage(event: Event, index: number): void {
+    if (event && event.target) {
+      const target = event.target as HTMLInputElement;
+      if (target.files && target.files[0]) {
+        const reader = new FileReader();
+        reader.readAsDataURL(target.files[0]); // read file as data url
+        reader.onload = (eventt) => { // called once readAsDataURL is completed
+
+          console.log(this.receiptForm);
+          console.log(index);
+
+          (this.receiptForm.get('steps') as FormArray).at(index).get('imageUrl').setValue((eventt.target as any).result);
+          this.receiptForm.updateValueAndValidity();
+        };
+      }
+    }
   }
 }

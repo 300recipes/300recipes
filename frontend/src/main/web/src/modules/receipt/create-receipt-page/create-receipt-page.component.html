@@ -19,7 +19,8 @@
 
         <div class=" form-field">
           <label for="imageUrl" class="form-label">Image url</label>
-          <textarea class="form-control" formControlName="imageUrl" id="imageUrl"></textarea>
+          <input id="imageUrl" (change)="selectReceiptImage($event)" type='file'>
+          <!--textarea class="form-control" formControlName="imageUrl" id="imageUrl"></textarea-->
         </div>
 
         <div class="ingredients" formArrayName="categories">
@@ -75,7 +76,7 @@
 
               </div>
               <input class="form-control my-2" type="text" formControlName="title" placeholder="Title">
-              <input class="form-control my-2" type="text" formControlName="imageUrl" placeholder="Image url">
+              <input (change)="selectImage($event, i)" type='file'>
               <textarea class="form-control my-2" formControlName="description" placeholder="Description"></textarea>
             </div>
           </div>
