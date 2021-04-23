@@ -27,6 +27,10 @@ export class MainPageComponent implements OnInit {
     {
       id: 'author',
       label: 'author',
+    },
+    {
+      id: 'rating',
+      label: 'rating'
     }
   ];
 
@@ -59,6 +63,10 @@ export class MainPageComponent implements OnInit {
       this.sortedReceipts = this.receipts;
       this.sortedReceipts = this.sortedReceipts.sort(
         (a, b) => a.author.toLocaleLowerCase().localeCompare(b.author.toLocaleLowerCase()));
+    } else if (sort.id === 'rating') {
+      this.sortedReceipts = this.receipts;
+      this.sortedReceipts = this.sortedReceipts.sort(
+        (a, b) => a.rating - b.rating);
     }
     if (!this.ascending) {
       this.sortedReceipts.reverse();
