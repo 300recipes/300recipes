@@ -30,7 +30,7 @@ export class MainPageComponent implements OnInit {
     }
   ];
 
-  public dropdownLabel = 'Sort by: name';
+  public dropdownLabel = 'name';
   public ascending = true;
 
   constructor(private receiptService: ReceiptService) {
@@ -63,7 +63,7 @@ export class MainPageComponent implements OnInit {
     if (!this.ascending) {
       this.sortedReceipts.reverse();
     }
-    this.dropdownLabel = 'Sort by: ' + sort.label;
+    this.dropdownLabel = sort.label;
   }
 
   public search(s: SearchReceipt): void {

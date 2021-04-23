@@ -117,7 +117,7 @@ export class CreateReceiptPageComponent implements OnInit {
 
       console.log(modified);
 
-      // this.receiptService.addRecipe(modified as any).subscribe();
+      this.receiptService.addRecipe(modified as any).subscribe();
     }
   }
 

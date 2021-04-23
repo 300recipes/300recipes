@@ -4,12 +4,17 @@
 
     <div class="receipts-list">
       <div class="sort-block">
-        <app-dropdown
-          (selectedItem)="selectSort($event)"
-          [width]="180"
-          [items]="sortOptions"
-          [label]="dropdownLabel">
-        </app-dropdown>
+        <div class="together">
+          <span>
+          Sort by:
+        </span>
+          <app-dropdown
+            (selectedItem)="selectSort($event)"
+            [width]="80"
+            [items]="sortOptions"
+            [label]="dropdownLabel">
+          </app-dropdown>
+        </div>
 
         <span class="asc-text">ascending:</span>
         <input
